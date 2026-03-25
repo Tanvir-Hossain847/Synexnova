@@ -33,21 +33,21 @@ export default function StartupSection() {
         {/* Two-column intro */}
         <div className="grid md:grid-cols-2 gap-16 items-center mb-24">
           <motion.div variants={slideLeft} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
-            <span className="text-xs font-semibold tracking-widest uppercase text-gray-400">Built for Startups</span>
-            <h2 className="mt-3 text-4xl md:text-5xl font-black tracking-tight text-black leading-tight">
-              From idea to<br /><span style={{ color: ACCENT }}>global scale.</span>
+            <span className="text-xs odibee font-semibold tracking-widest uppercase text-gray-400">Built for Startups</span>
+            <h2 className="mt-3 text-4xl odibee md:text-6xl text-black">
+              From idea to<br /><span className="accent odibee">global scale.</span>
             </h2>
-            <p className="mt-5 text-base text-gray-400 font-light leading-relaxed max-w-md">
+            <p className="mt-5 anta text-base text-gray-400 font-light leading-relaxed max-w-md">
               SynexNova was built with startups in mind. We know the pressure of moving fast, staying lean, and needing technology that grows with you — not against you.
             </p>
-            <p className="mt-4 text-base text-gray-400 font-light leading-relaxed max-w-md">
+            <p className="mt-4 anta text-base text-gray-400 font-light leading-relaxed max-w-md">
               Whether you're pre-launch or scaling across borders, we give you the same enterprise-grade tools that Fortune 500 companies use — at a price and pace that works for founders.
             </p>
             <div className="mt-8 flex items-center gap-4">
-              <Button className="bg-black text-white hover:bg-gray-800 rounded-full px-6 font-medium transition-colors">
+              <Button className="bg-black anta text-white hover:bg-gray-800 rounded-full px-6 font-medium transition-colors">
                 Start Building <ArrowRight size={14} className="ml-2" />
               </Button>
-              <a href="#" className="text-sm font-medium text-gray-500 hover:text-black transition-colors flex items-center gap-1">
+              <a href="#" className="text-sm anta font-medium text-gray-500 hover:text-black transition-colors flex items-center gap-1">
                 See case studies <ArrowRight size={13} />
               </a>
             </div>
@@ -67,9 +67,9 @@ export default function StartupSection() {
               >
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"
                   style={{ background: `radial-gradient(ellipse at top left, ${ACCENT_ALPHA(0.07)} 0%, transparent 70%)` }} />
-                <p className="text-3xl font-black text-black">{s.val}</p>
-                <p className="text-sm font-semibold text-black mt-1">{s.label}</p>
-                <p className="text-xs text-gray-400 mt-0.5 font-light">{s.sub}</p>
+                <p className="anta text-3xl font-black text-black">{s.val}</p>
+                <p className="anta text-sm font-semibold text-black mt-1">{s.label}</p>
+                <p className="anta text-xs text-gray-400 mt-0.5 font-light">{s.sub}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -80,7 +80,7 @@ export default function StartupSection() {
           className="mb-20"
           variants={stagger(0.07)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }}
         >
-          <motion.h3 variants={fadeUp} className="text-2xl font-black text-black mb-8">
+          <motion.h3 variants={fadeUp} className="text-2xl anta text-black mb-8">
             Why startups choose SynexNova
           </motion.h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -101,8 +101,8 @@ export default function StartupSection() {
                   <div className="w-10 h-10 rounded-xl bg-gray-50 group-hover:bg-accent/10 flex items-center justify-center mb-4 transition-colors">
                     <Icon size={18} className="text-gray-600 group-hover:text-accent transition-colors" />
                   </div>
-                  <h4 className="text-base font-bold text-black mb-1.5">{p.title}</h4>
-                  <p className="text-sm text-gray-400 font-light leading-relaxed">{p.desc}</p>
+                  <h4 className="text-base anta font-bold text-black mb-1.5">{p.title}</h4>
+                  <p className="text-sm anta text-gray-400 font-light leading-relaxed">{p.desc}</p>
                 </motion.div>
               );
             })}

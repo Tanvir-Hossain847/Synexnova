@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Six+Caps&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -121,6 +124,20 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+.odibee {
+  font-family: "Odibee Sans", sans-serif;
+}
+
+
+.six {
+  font-family: "Six Caps", sans-serif;
+}
+
+.anta {
+  font-family: "Anta", sans-serif;
+}
+
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -138,3 +155,4 @@
     font-family: var(--font-roboto), sans-serif;
   }
 }
+
