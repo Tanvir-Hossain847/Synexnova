@@ -61,11 +61,11 @@ export default function Testimonials() {
     <section className="bg-gray-50 py-28 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div className="text-center mb-16" variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
-          <motion.span variants={fadeUp} className="text-xs font-semibold tracking-widest uppercase text-gray-400">Client Stories</motion.span>
-          <motion.h2 variants={fadeUp} className="mt-3 text-4xl md:text-5xl font-black tracking-tight text-black leading-tight">
+          <motion.span variants={fadeUp} className="text-xs font-semibold tracking-widest uppercase text-gray-400 anta">Client Stories</motion.span>
+          <motion.h2 variants={fadeUp} className="mt-3 text-4xl md:text-5xl tracking-tight text-black anta">
             Startups that shipped<br />with SynexNova.
           </motion.h2>
-          <motion.p variants={fadeUp} className="mt-4 text-base text-gray-400 font-light max-w-xl mx-auto">
+          <motion.p variants={fadeUp} className="mt-4 text-base text-gray-400 font-light max-w-xl mx-auto anta">
             Real founders, real results. Here's what they built with us.
           </motion.p>
         </motion.div>
@@ -81,19 +81,19 @@ export default function Testimonials() {
               <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-8" style={{ backgroundColor: `${t.color}22` }}>
                 <Quote size={18} style={{ color: t.color }} />
               </div>
-              <p className="text-xl md:text-2xl font-light text-black leading-relaxed mb-8">"{t.quote}"</p>
+              <p className="text-xl md:text-2xl anta text-gray-400 leading-relaxed mb-8">"{t.quote}"</p>
               <div className="flex items-center justify-between flex-wrap gap-4">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold text-white" style={{ backgroundColor: t.color }}>
                     {t.avatar}
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-black">{t.name}</p>
-                    <p className="text-xs text-gray-400">{t.role} · {t.company}</p>
-                    <p className="text-xs text-gray-400">{t.location}</p>
+                    <p className="text-sm odibee text-black">{t.name}</p>
+                    <p className="text-xs anta text-gray-400">{t.role} · {t.company}</p>
+                    <p className="text-xs anta text-gray-400">{t.location}</p>
                   </div>
                 </div>
-                <span className="text-xs font-semibold px-4 py-2 rounded-full border" style={{ borderColor: t.color, color: t.color, backgroundColor: `${t.color}11` }}>
+                <span className="text-xs anta px-4 py-2 rounded-full border" style={{ borderColor: t.color, color: t.color, backgroundColor: `${t.color}11` }}>
                   {t.metric}
                 </span>
               </div>

@@ -68,7 +68,7 @@
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   /* accent = #10b981 emerald */
-  --accent: oklch(58.933% 0.06128 236.44);
+  --accent: rgb(89, 131, 157);
   --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);

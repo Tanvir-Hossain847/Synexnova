@@ -27,7 +27,7 @@ const regions = ["North America", "Europe", "Middle East", "South Asia", "Southe
 
 export default function StartupSection() {
   return (
-    <section className="bg-white py-28 overflow-hidden">
+    <section className="bg-white py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Two-column intro */}
@@ -109,30 +109,7 @@ export default function StartupSection() {
           </div>
         </motion.div>
 
-        {/* Global reach strip */}
-        <motion.div
-          variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}
-          className="rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
-          style={{ backgroundColor: "#f0fdf8", border: "1px solid #a7f3d0" }}
-        >
-          <div>
-            <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: ACCENT }}>Global Presence</span>
-            <h3 className="mt-2 text-2xl md:text-3xl font-black text-black">Serving startups across 6 regions.</h3>
-            <p className="mt-2 text-sm text-gray-400 font-light max-w-md">
-              Our solutions are localized, compliant, and optimized for the markets you're entering — not just the one you're in.
-            </p>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {regions.map((r) => (
-                <span key={r} className="text-xs font-medium px-3 py-1.5 rounded-full bg-white border text-gray-600" style={{ borderColor: "#6ee7b7" }}>
-                  {r}
-                </span>
-              ))}
-            </div>
-          </div>
-          <Button className="shrink-0 rounded-full px-7 font-semibold text-white hover:opacity-90 transition-opacity" style={{ backgroundColor: ACCENT }}>
-            Explore Global Plans <ArrowRight size={14} className="ml-2" />
-          </Button>
-        </motion.div>
+        {/* Global reach — moved to GlobePresence section */}
 
       </div>
     </section>
