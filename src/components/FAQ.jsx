@@ -85,17 +85,17 @@ export default function FAQ() {
             <motion.span variants={fadeUp} className="text-xs font-semibold tracking-widest uppercase text-gray-400">
               FAQ
             </motion.span>
-            <motion.h2 variants={fadeUp} className="mt-3 text-4xl md:text-5xl font-black tracking-tight text-black leading-tight">
+            <motion.h2 variants={fadeUp} className="mt-3 text-4xl md:text-5xl font-black tracking-tight text-black anta">
               Questions,
               <br />answered.
             </motion.h2>
-            <motion.p variants={fadeUp} className="mt-4 text-base text-gray-400 font-light leading-relaxed">
+            <motion.p variants={fadeUp} className="mt-4 text-base text-gray-400 anta leading-relaxed">
               Everything you need to know before getting started with SynexNova.
             </motion.p>
             <motion.a
               variants={fadeUp}
-              href="#contact"
-              className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-black hover:gap-3 transition-all duration-200"
+              href="/contact"
+              className="mt-6 inline-flex items-center gap-1.5 anta text-sm font-medium text-black hover:gap-3 transition-all duration-200"
             >
               Still have questions? Talk to us →
             </motion.a>

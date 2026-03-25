@@ -88,8 +88,20 @@ export default function Globe() {
 
     return () => {
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
-      if (globe) globe.destroy();
       observer.disconnect();
+      try {
+        if (globe) {
+          const canvas = canvasRef.current;
+          if (canvas && canvas.parentNode) {
+            const placeholder = document.createElement("canvas");
+            canvas.parentNode.replaceChild(placeholder, canvas);
+            globe.destroy();
+            placeholder.parentNode && placeholder.parentNode.replaceChild(canvas, placeholder);
+          } else {
+            globe.destroy();
+          }
+        }
+      } catch (_) {}
     };
   }, []);
 
