@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { fadeUp, stagger, fromLeft, fromRight } from "@/lib/motion";
+import { fadeUp, stagger } from "@/lib/motion";
 import {
   ShoppingCart, Package, Globe, Users, Handshake,
   Smartphone, Cpu, Bot, ArrowRight,
@@ -17,6 +17,19 @@ const features = [
   { icon: Bot, title: "AI Agents", desc: "Intelligent agents that automate workflows, answer queries, and surface insights 24/7.", tag: "AI", size: "md:col-span-2", highlight: true },
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 48 },
+  show: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.55,
+      ease: [0.22, 1, 0.36, 1],
+      delay: i * 0.08,
+    },
+  }),
+};
+
 export default function Features() {
   return (
     <section id="services" className="bg-gray-50 py-28">
@@ -25,25 +38,26 @@ export default function Features() {
           className="max-w-2xl mb-16"
           variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}
         >
-          <motion.span variants={fadeUp} className="text-xs font-semibold tracking-widest uppercase text-gray-400">What We Build</motion.span>
-          <motion.h2 variants={fadeUp} className="mt-3 text-4xl md:text-5xl font-black tracking-tight text-black leading-tight">
+          <motion.span variants={fadeUp} className="text-xs font-semibold tracking-widest uppercase text-gray-400 odibee">What We Build</motion.span>
+          <motion.h2 variants={fadeUp} className="mt-3 text-4xl md:text-6xl text-black odibee">
             Every tool your<br />business needs.
           </motion.h2>
-          <motion.p variants={fadeUp} className="mt-4 text-base text-gray-400 font-light leading-relaxed">
+          <motion.p variants={fadeUp} className="mt-4 text-base text-gray-400 font-light leading-relaxed anta">
             Eight integrated solutions designed to work together — or independently — so you can move fast without switching platforms.
           </motion.p>
         </motion.div>
 
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
-          variants={stagger(0.08)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {features.map((f, i) => {
             const Icon = f.icon;
             return (
               <motion.div
                 key={f.title}
-                variants={i % 2 === 0 ? fromLeft : fromRight}
+                custom={i}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.15 }}
                 className={`${f.size} group relative rounded-2xl border p-7 cursor-pointer overflow-hidden
                   shadow-[0_2px_12px_rgba(0,0,0,0.06)]
                   transition-all duration-300 hover:-translate-y-1
@@ -77,8 +91,8 @@ export default function Features() {
                   </span>
                 </div>
 
-                <h3 className={`text-lg font-bold mb-2 ${f.highlight ? "text-white" : "text-black"}`}>{f.title}</h3>
-                <p className={`text-sm leading-relaxed font-light ${f.highlight ? "text-white/50" : "text-gray-400"}`}>{f.desc}</p>
+                <h3 className={`text-lg font-bold mb-2 anta ${f.highlight ? "text-white" : "text-black"}`}>{f.title}</h3>
+                <p className={`text-sm leading-relaxed font-light anta ${f.highlight ? "text-white/50" : "text-gray-400"}`}>{f.desc}</p>
 
                 <div className={`mt-6 flex items-center gap-1.5 text-xs font-medium transition-all duration-200 group-hover:gap-3
                   ${f.highlight ? "text-white/30 group-hover:text-accent" : "text-gray-300 group-hover:text-accent"}`}>
@@ -87,7 +101,7 @@ export default function Features() {
               </motion.div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

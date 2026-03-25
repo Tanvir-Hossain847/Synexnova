@@ -7,12 +7,12 @@ export default function Hero() {
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:80px_80px] opacity-50"></div> {/*this is the grid design and amount of grid */}
 
       <div className="">
-        <div className="absolute mt-40 ml-15">
-          <h1 className='text-5xl font-bold leading-tight max-w-4xl kiona'>
+        <div className="absolute mt-50 ml-35">
+          <h1 className='text-6xl font-bold leading-tight max-w-4xl anta'>
             One Platform.<br />
-            <span style={{ color: "var(--color-accent)" }}>Every Business Solution.</span>
+            <span className='text-accent anta'>Every Business Solution.</span>
           </h1>
-          <p className='mt-6 max-w-2xl text-md text-accent'>
+          <p className='mt-6 max-w-2xl text-md text-accent anta'>
             SynexNova is a USA-based technology company delivering POS, inventory,
             e-commerce, HRM, CRM, mobile apps, and AI-powered solutions — built to
             launch fast and scale globally.
