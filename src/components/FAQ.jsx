@@ -49,7 +49,7 @@ function FAQItem({ q, a, isOpen, onToggle }) {
         <span className="text-base font-semibold text-black group-hover:text-gray-700 transition-colors pr-8">
           {q}
         </span>
-        <span className="shrink-0 w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-emerald-400 transition-colors">
+        <span className="shrink-0 w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-accent transition-colors">
           {isOpen ? <Minus size={13} className="text-gray-600" /> : <Plus size={13} className="text-gray-600" />}
         </span>
       </button>

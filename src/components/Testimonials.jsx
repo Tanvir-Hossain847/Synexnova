@@ -4,12 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { fadeUp, stagger } from "@/lib/motion";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
-const EMERALD = "#10b981";
+const ACCENT = "var(--color-accent)";
+const ACCENT_ALPHA = (a) => `color-mix(in srgb, var(--color-accent) ${Math.round(a * 100)}%, transparent)`;
 
 const testimonials = [
   {
     name: "Sarah Mitchell", role: "Co-Founder & CEO", company: "Vendra Commerce", location: "Austin, TX",
-    avatar: "SM", color: EMERALD,
+    avatar: "SM", color: ACCENT,
     quote: "SynexNova gave us a full POS and e-commerce stack in under 48 hours. We launched our retail brand without hiring a single developer. The platform just works — and it scaled with us from 1 store to 12.",
     metric: "12 stores launched",
   },
@@ -76,7 +77,7 @@ export default function Testimonials() {
               className="group relative bg-white rounded-3xl border border-gray-100 p-8 md:p-12 shadow-[0_4px_24px_rgba(0,0,0,0.06)] overflow-hidden"
             >
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl"
-                style={{ background: "radial-gradient(ellipse at top left, rgba(16,185,129,0.06) 0%, transparent 60%)" }} />
+                style={{ background: `radial-gradient(ellipse at top left, ${ACCENT_ALPHA(0.06)} 0%, transparent 60%)` }} />
               <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-8" style={{ backgroundColor: `${t.color}22` }}>
                 <Quote size={18} style={{ color: t.color }} />
               </div>
@@ -104,15 +105,15 @@ export default function Testimonials() {
               {testimonials.map((_, i) => (
                 <button key={i} onClick={() => { setDir(i > index ? 1 : -1); setIndex(i); }}
                   className="rounded-full transition-all duration-300"
-                  style={{ width: i === index ? 24 : 8, height: 8, backgroundColor: i === index ? EMERALD : "#e5e7eb" }}
+                  style={{ width: i === index ? 24 : 8, height: 8, backgroundColor: i === index ? ACCENT : "#e5e7eb" }}
                   aria-label={`Go to testimonial ${i + 1}`} />
               ))}
             </div>
             <div className="flex items-center gap-2">
-              <button onClick={() => go(-1)} className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:border-emerald-400 hover:text-emerald-600 transition-all duration-200" aria-label="Previous">
+              <button onClick={() => go(-1)} className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:border-accent hover:text-accent transition-all duration-200" aria-label="Previous">
                 <ChevronLeft size={18} />
               </button>
-              <button onClick={() => go(1)} className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:border-emerald-400 hover:text-emerald-600 transition-all duration-200" aria-label="Next">
+              <button onClick={() => go(1)} className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:border-accent hover:text-accent transition-all duration-200" aria-label="Next">
                 <ChevronRight size={18} />
               </button>
             </div>
