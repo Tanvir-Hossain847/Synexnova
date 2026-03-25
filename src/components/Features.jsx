@@ -6,8 +6,6 @@ import {
   Smartphone, Cpu, Bot, ArrowRight,
 } from "lucide-react";
 
-const EMERALD = "#10b981";
-
 const features = [
   { icon: ShoppingCart, title: "Point of Sale", desc: "Lightning-fast checkout, multi-register support, offline mode, and real-time sales reporting.", tag: "Retail", size: "md:col-span-2" },
   { icon: Package, title: "Inventory Management", desc: "Track stock levels, automate reorders, and sync across warehouses in real time.", tag: "Operations", size: "" },
@@ -50,8 +48,8 @@ export default function Features() {
                   shadow-[0_2px_12px_rgba(0,0,0,0.06)]
                   transition-all duration-300 hover:-translate-y-1
                   ${f.highlight
-                    ? "bg-black border-black hover:shadow-[0_16px_48px_rgba(16,185,129,0.25)]"
-                    : "bg-white border-gray-100 hover:border-emerald-200 hover:shadow-[0_16px_48px_rgba(16,185,129,0.18)]"
+                    ? "bg-black border-black hover:shadow-[0_16px_48px_color-mix(in_srgb,var(--color-accent)_25%,transparent)]"
+                    : "bg-white border-gray-100 hover:border-accent hover:shadow-[0_16px_48px_color-mix(in_srgb,var(--color-accent)_18%,transparent)]"
                   }`}
               >
                 {/* Glow overlay */}
@@ -59,22 +57,22 @@ export default function Features() {
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"
                   style={{
                     background: f.highlight
-                      ? "radial-gradient(ellipse at top left, rgba(16,185,129,0.12) 0%, transparent 65%)"
-                      : "radial-gradient(ellipse at top left, rgba(16,185,129,0.07) 0%, transparent 65%)",
+                      ? "radial-gradient(ellipse at top left, color-mix(in srgb, var(--color-accent) 12%, transparent) 0%, transparent 65%)"
+                      : "radial-gradient(ellipse at top left, color-mix(in srgb, var(--color-accent) 7%, transparent) 0%, transparent 65%)",
                   }}
                 />
 
                 {!f.highlight && (
-                  <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: EMERALD }} />
+                  <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-accent" />
                 )}
 
                 <div className="flex items-start justify-between mb-6">
                   <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl transition-colors
-                    ${f.highlight ? "bg-white/10 group-hover:bg-emerald-500/20" : "bg-gray-50 group-hover:bg-emerald-50"}`}>
-                    <Icon size={18} className={f.highlight ? "text-white group-hover:text-emerald-400 transition-colors" : "text-gray-600 group-hover:text-emerald-600 transition-colors"} />
+                    ${f.highlight ? "bg-white/10 group-hover:bg-accent/20" : "bg-gray-50 group-hover:bg-accent/10"}`}>
+                    <Icon size={18} className={f.highlight ? "text-white group-hover:text-accent transition-colors" : "text-gray-600 group-hover:text-accent transition-colors"} />
                   </div>
                   <span className={`text-[10px] font-semibold tracking-widest uppercase px-2.5 py-1 rounded-full
-                    ${f.highlight ? "bg-white/10 text-white/60" : "bg-gray-50 text-gray-400 group-hover:bg-emerald-50 group-hover:text-emerald-600"}`}>
+                    ${f.highlight ? "bg-white/10 text-white/60" : "bg-gray-50 text-gray-400 group-hover:bg-accent/10 group-hover:text-accent"}`}>
                     {f.tag}
                   </span>
                 </div>
@@ -83,7 +81,7 @@ export default function Features() {
                 <p className={`text-sm leading-relaxed font-light ${f.highlight ? "text-white/50" : "text-gray-400"}`}>{f.desc}</p>
 
                 <div className={`mt-6 flex items-center gap-1.5 text-xs font-medium transition-all duration-200 group-hover:gap-3
-                  ${f.highlight ? "text-white/30 group-hover:text-emerald-400" : "text-gray-300 group-hover:text-emerald-600"}`}>
+                  ${f.highlight ? "text-white/30 group-hover:text-accent" : "text-gray-300 group-hover:text-accent"}`}>
                   Learn more <ArrowRight size={11} />
                 </div>
               </motion.div>

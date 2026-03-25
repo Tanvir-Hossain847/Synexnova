@@ -4,7 +4,8 @@ import { fadeUp, stagger, slideLeft, slideRight, fromLeft, fromRight } from "@/l
 import { ArrowRight, Rocket, Globe, Puzzle, TrendingUp, Shield, HeadphonesIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const EMERALD = "#10b981";
+const ACCENT = "var(--color-accent)";
+const ACCENT_ALPHA = (a) => `color-mix(in srgb, var(--color-accent) ${Math.round(a * 100)}%, transparent)`;
 
 const pillars = [
   { icon: Rocket, title: "Launch-Ready Stack", desc: "Everything a startup needs from day one — POS, e-commerce, CRM, and mobile — pre-integrated and ready to deploy." },
@@ -34,7 +35,7 @@ export default function StartupSection() {
           <motion.div variants={slideLeft} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
             <span className="text-xs font-semibold tracking-widest uppercase text-gray-400">Built for Startups</span>
             <h2 className="mt-3 text-4xl md:text-5xl font-black tracking-tight text-black leading-tight">
-              From idea to<br /><span style={{ color: EMERALD }}>global scale.</span>
+              From idea to<br /><span style={{ color: ACCENT }}>global scale.</span>
             </h2>
             <p className="mt-5 text-base text-gray-400 font-light leading-relaxed max-w-md">
               SynexNova was built with startups in mind. We know the pressure of moving fast, staying lean, and needing technology that grows with you — not against you.
@@ -62,10 +63,10 @@ export default function StartupSection() {
                 variants={i % 2 === 0 ? fromLeft : fromRight}
                 className="group rounded-2xl border border-gray-100 bg-gray-50 p-6 overflow-hidden relative
                   shadow-[0_2px_12px_rgba(0,0,0,0.05)]
-                  hover:border-emerald-200 hover:shadow-[0_8px_32px_rgba(16,185,129,0.15)] transition-all duration-300"
+                  hover:border-accent/30 hover:shadow-[0_8px_32px_color-mix(in_srgb,var(--color-accent)_15%,transparent)] transition-all duration-300"
               >
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"
-                  style={{ background: "radial-gradient(ellipse at top left, rgba(16,185,129,0.07) 0%, transparent 70%)" }} />
+                  style={{ background: `radial-gradient(ellipse at top left, ${ACCENT_ALPHA(0.07)} 0%, transparent 70%)` }} />
                 <p className="text-3xl font-black text-black">{s.val}</p>
                 <p className="text-sm font-semibold text-black mt-1">{s.label}</p>
                 <p className="text-xs text-gray-400 mt-0.5 font-light">{s.sub}</p>
@@ -91,14 +92,14 @@ export default function StartupSection() {
                   variants={i % 2 === 0 ? fromLeft : fromRight}
                   className="group rounded-2xl border border-gray-100 bg-white p-6 overflow-hidden relative
                     shadow-[0_2px_12px_rgba(0,0,0,0.06)]
-                    hover:-translate-y-1 hover:border-emerald-200 hover:shadow-[0_12px_40px_rgba(16,185,129,0.18)]
+                    hover:-translate-y-1 hover:border-accent/30 hover:shadow-[0_12px_40px_color-mix(in_srgb,var(--color-accent)_18%,transparent)]
                     transition-all duration-300 cursor-pointer"
                 >
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"
-                    style={{ background: "radial-gradient(ellipse at top left, rgba(16,185,129,0.07) 0%, transparent 70%)" }} />
-                  <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: EMERALD }} />
-                  <div className="w-10 h-10 rounded-xl bg-gray-50 group-hover:bg-emerald-50 flex items-center justify-center mb-4 transition-colors">
-                    <Icon size={18} className="text-gray-600 group-hover:text-emerald-600 transition-colors" />
+                    style={{ background: `radial-gradient(ellipse at top left, ${ACCENT_ALPHA(0.07)} 0%, transparent 70%)` }} />
+                  <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: ACCENT }} />
+                  <div className="w-10 h-10 rounded-xl bg-gray-50 group-hover:bg-accent/10 flex items-center justify-center mb-4 transition-colors">
+                    <Icon size={18} className="text-gray-600 group-hover:text-accent transition-colors" />
                   </div>
                   <h4 className="text-base font-bold text-black mb-1.5">{p.title}</h4>
                   <p className="text-sm text-gray-400 font-light leading-relaxed">{p.desc}</p>
@@ -115,7 +116,7 @@ export default function StartupSection() {
           style={{ backgroundColor: "#f0fdf8", border: "1px solid #a7f3d0" }}
         >
           <div>
-            <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: EMERALD }}>Global Presence</span>
+            <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: ACCENT }}>Global Presence</span>
             <h3 className="mt-2 text-2xl md:text-3xl font-black text-black">Serving startups across 6 regions.</h3>
             <p className="mt-2 text-sm text-gray-400 font-light max-w-md">
               Our solutions are localized, compliant, and optimized for the markets you're entering — not just the one you're in.
@@ -128,7 +129,7 @@ export default function StartupSection() {
               ))}
             </div>
           </div>
-          <Button className="shrink-0 rounded-full px-7 font-semibold text-white hover:opacity-90 transition-opacity" style={{ backgroundColor: EMERALD }}>
+          <Button className="shrink-0 rounded-full px-7 font-semibold text-white hover:opacity-90 transition-opacity" style={{ backgroundColor: ACCENT }}>
             Explore Global Plans <ArrowRight size={14} className="ml-2" />
           </Button>
         </motion.div>

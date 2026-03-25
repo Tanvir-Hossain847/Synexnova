@@ -14,12 +14,12 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/0">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <a href="/" className="flex items-center">
           <span className="text-xl font-black tracking-tight text-black">Synex</span>
-          <span className="text-xl font-black tracking-tight" style={{ color: "#10b981" }}>Nova</span>
+          <span className="text-xl font-black tracking-tight" style={{ color: "var(--color-accent)" }}>Nova</span>
         </a>
 
         {/* Desktop nav */}

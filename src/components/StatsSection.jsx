@@ -3,7 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { fadeUp, stagger, fromLeft, fromRight } from "@/lib/motion";
 
-const EMERALD = "#10b981";
+const ACCENT = "var(--color-accent)";
+const ACCENT_ALPHA = (a) => `color-mix(in srgb, var(--color-accent) ${Math.round(a * 100)}%, transparent)`;
 
 const stats = [
   { end: 850, suffix: "+", label: "Startups Helped", desc: "Across industries and growth stages" },
@@ -74,15 +75,15 @@ export default function StatsSection() {
               variants={i % 2 === 0 ? fromLeft : fromRight}
               className="group relative bg-black px-8 py-10 overflow-hidden hover:bg-gray-950 transition-colors duration-200"
             >
-              {/* Emerald glow on hover */}
+              {/* accent glow on hover */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                style={{ background: "radial-gradient(ellipse at top left, rgba(16,185,129,0.1) 0%, transparent 65%)" }} />
+                style={{ background: `radial-gradient(ellipse at top left, ${ACCENT_ALPHA(0.1)} 0%, transparent 65%)` }} />
               <p className="text-4xl md:text-5xl font-black text-white tabular-nums">
                 <CountUp end={s.end} suffix={s.suffix} decimal={s.decimal} inView={inView} />
               </p>
               <p className="mt-2 text-base font-semibold text-white">{s.label}</p>
               <p className="mt-1 text-sm text-gray-500 font-light">{s.desc}</p>
-              <div className="mt-4 w-8 h-[2px] rounded-full transition-all duration-300 group-hover:w-14" style={{ backgroundColor: EMERALD }} />
+              <div className="mt-4 w-8 h-[2px] rounded-full transition-all duration-300 group-hover:w-14" style={{ backgroundColor: ACCENT }} />
             </motion.div>
           ))}
         </motion.div>
