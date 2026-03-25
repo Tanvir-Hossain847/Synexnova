@@ -3,8 +3,9 @@ import Globe from './Globe'
 
 export default function Hero() {
   return (
-    <div className=''>
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:40px_40px] opacity-50"></div>
+    <div className='overflow-hidden'>
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:80px_80px] opacity-50"></div> {/*this is the grid design and amount of grid */}
+
       <div className="">
         <div className="absolute mt-40 ml-15">
           <h1 className='text-5xl font-bold leading-tight max-w-4xl kiona'>
