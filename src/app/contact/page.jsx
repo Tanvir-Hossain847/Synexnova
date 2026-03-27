@@ -73,10 +73,10 @@ export default function ContactPage() {
             </motion.span>
             <motion.h1
               variants={fadeUp}
-              className="mt-3 text-5xl md:text-7xl font-black tracking-tight text-black leading-tight odibee"
+              className="mt-3 text-5xl md:text-7xl text-black odibee"
             >
               Let's build something<br />
-              <span style={{ color: "var(--color-accent)" }}>great together.</span>
+              <span className="text-accent odibee">great together.</span>
             </motion.h1>
             <motion.p
               variants={fadeUp}
@@ -135,9 +135,9 @@ export default function ContactPage() {
             >
               <div>
                 <span className="text-xs odibee font-semibold tracking-widest uppercase text-gray-400">Why reach out?</span>
-                <h2 className="mt-3 text-3xl md:text-4xl font-black tracking-tight text-black leading-tight odibee">
+                <h2 className="mt-3 text-3xl md:text-5xl text-black odibee">
                   We respond fast.<br />
-                  <span style={{ color: "var(--color-accent)" }}>We deliver faster.</span>
+                  <span className="text-accent odibee">We deliver faster.</span>
                 </h2>
                 <p className="mt-4 text-sm text-gray-400 font-light leading-relaxed anta">
                   Our team is made up of builders, not salespeople. When you reach out,

@@ -50,39 +50,37 @@ export default function StatsSection() {
   }, []);
 
   return (
-    <section ref={ref} className="bg-black py-28 overflow-hidden">
+    <section ref={ref} className="bg-white py-28 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           className="text-center mb-16"
           variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}
         >
-          <motion.span variants={fadeUp} className="text-xs odibee font-semibold tracking-widest uppercase text-gray-500">Our Impact</motion.span>
-          <motion.h2 variants={fadeUp} className="mt-3 text-4xl md:text-5xl font-black text-white anta">
+          <motion.span variants={fadeUp} className="text-xs odibee font-semibold tracking-widest uppercase text-black">Our Impact</motion.span>
+          <motion.h2 variants={fadeUp} className="mt-3 text-4xl md:text-5xl font-black text-black anta">
             Numbers that speak.
           </motion.h2>
-          <motion.p variants={fadeUp} className="mt-4 text-base text-gray-500 font-light max-w-xl anta mx-auto leading-relaxed">
+          <motion.p variants={fadeUp} className="mt-4 text-base text-accent font-light max-w-xl anta mx-auto leading-relaxed">
             A decade of building, shipping, and scaling technology for businesses around the world.
           </motion.p>
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-3 gap-px bg-gray-800 rounded-2xl overflow-hidden"
+          className="grid grid-cols-2 md:grid-cols-3 gap-px rounded-2xl overflow-hidden"
           variants={stagger(0.08)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
         >
           {stats.map((s, i) => (
             <motion.div
               key={s.label}
               variants={i % 2 === 0 ? fromLeft : fromRight}
-              className="group relative bg-black px-8 py-10 overflow-hidden hover:bg-gray-950 transition-colors duration-200"
+              className="group relative bg-white px-8 py-10 overflow-hidden hover:bg-accent/10 hover:text-white transition-all duration-200"
             >
               {/* accent glow on hover */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                style={{ background: `radial-gradient(ellipse at top left, ${ACCENT_ALPHA(0.1)} 0%, transparent 65%)` }} />
-              <p className="text-4xl anta md:text-5xl font-black text-white tabular-nums">
+              <p className="text-4xl anta md:text-5xl font-black text-accent tabular-nums">
                 <CountUp end={s.end} suffix={s.suffix} decimal={s.decimal} inView={inView} />
               </p>
-              <p className="mt-2 anta text-base font-semibold text-white">{s.label}</p>
-              <p className="mt-1 anta text-sm text-gray-500 font-light">{s.desc}</p>
+              <p className="mt-2 anta text-base font-semibold text-accent">{s.label}</p>
+              <p className="mt-1 anta text-sm text-accent font-light">{s.desc}</p>
               <div className="mt-4 w-8 h-[2px] rounded-full transition-all duration-300 group-hover:w-14" style={{ backgroundColor: ACCENT }} />
             </motion.div>
           ))}

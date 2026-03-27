@@ -35,7 +35,7 @@ export default function StartupSection() {
           <motion.div variants={slideLeft} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
             <span className="text-xs odibee font-semibold tracking-widest uppercase text-gray-400">Built for Startups</span>
             <h2 className="mt-3 text-4xl odibee md:text-6xl text-black">
-              From idea to<br /><span className="accent odibee">global scale.</span>
+              From idea to<br /><span className="text-accent odibee">global scale.</span>
             </h2>
             <p className="mt-5 anta text-base text-gray-400 font-light leading-relaxed max-w-md">
               SynexNova was built with startups in mind. We know the pressure of moving fast, staying lean, and needing technology that grows with you — not against you.
@@ -44,7 +44,7 @@ export default function StartupSection() {
               Whether you're pre-launch or scaling across borders, we give you the same enterprise-grade tools that Fortune 500 companies use — at a price and pace that works for founders.
             </p>
             <div className="mt-8 flex items-center gap-4">
-              <Button className="bg-black anta text-white hover:bg-gray-800 rounded-full px-6 font-medium transition-colors">
+              <Button className="bg-accent anta text-white hover:bg-gray-800 rounded-full px-6 font-medium transition-colors">
                 Start Building <ArrowRight size={14} className="ml-2" />
               </Button>
               <a href="#" className="text-sm anta font-medium text-gray-500 hover:text-black transition-colors flex items-center gap-1">

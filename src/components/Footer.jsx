@@ -25,15 +25,15 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-white">
+    <footer className="bg-accent text-white">
       {/* CTA band */}
-      <div className="border-b border-white/10">
+      <div className="border-b border-white/40">
         <div className="max-w-7xl mx-auto px-6 py-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
-            <p className="text-xs font-semibold tracking-widest uppercase text-gray-500 mb-2">
+            <p className="text-lg font-semibold tracking-widest odibee uppercase text-primary mb-2">
               Ready to launch?
             </p>
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight leading-tight">
+            <h2 className="text-3xl md:text-6xl odibee">
               Build your business<br />
               <span style={{ color: "var(--color-accent)" }}>with SynexNova.</span>
             </h2>
@@ -41,8 +41,7 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row gap-3 shrink-0">
             <a
               href="#"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm text-black transition-opacity hover:opacity-90"
-              style={{ backgroundColor: "var(--color-accent)" }}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm text-accent transition-opacity hover:opacity-90 bg-white"
             >
               Get Started <ArrowRight size={14} />
             </a>
@@ -65,20 +64,20 @@ export default function Footer() {
               <span className="text-2xl font-black tracking-tight text-white">Synex</span>
               <span className="text-2xl font-black tracking-tight" style={{ color: "var(--color-accent)" }}>Nova</span>
             </a>
-            <p className="text-sm text-gray-500 font-light leading-relaxed max-w-xs">
+            <p className="text-sm text-white font-light leading-relaxed max-w-xs">
               A USA-based technology company delivering end-to-end business solutions — built to launch fast and scale globally.
             </p>
             {/* Contact */}
             <div className="space-y-2.5">
-              <a href="mailto:hello@synexnova.com" className="flex items-center gap-2.5 text-sm text-gray-500 hover:text-white transition-colors">
+              <a href="mailto:hello@synexnova.com" className="flex items-center gap-2.5 text-sm text-white transition-colors">
                 <Mail size={13} className="shrink-0" />
                 hello@synexnova.com
               </a>
-              <a href="tel:+18005551234" className="flex items-center gap-2.5 text-sm text-gray-500 hover:text-white transition-colors">
+              <a href="tel:+18005551234" className="flex items-center gap-2.5 text-sm text-white transition-colors">
                 <Phone size={13} className="shrink-0" />
                 +1 (800) 555-1234
               </a>
-              <div className="flex items-start gap-2.5 text-sm text-gray-500">
+              <div className="flex items-start gap-2.5 text-sm text-white">
                 <MapPin size={13} className="shrink-0 mt-0.5" />
                 <span>123 Innovation Drive,<br />Austin, TX 78701, USA</span>
               </div>
@@ -90,7 +89,7 @@ export default function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-500 hover:border-white/40 hover:text-white transition-all duration-200"
+                  className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white hover:border-white/40 transition-all duration-200"
                 >
                   <Icon size={13} />
                 </a>
@@ -101,7 +100,7 @@ export default function Footer() {
           {/* Link cols */}
           {Object.entries(links).map(([heading, items]) => (
             <div key={heading}>
-              <p className="text-xs font-semibold tracking-widest uppercase text-gray-500 mb-4">
+              <p className="text-xs font-semibold tracking-widest uppercase text-white mb-4">
                 {heading}
               </p>
               <ul className="space-y-2.5">
@@ -109,7 +108,7 @@ export default function Footer() {
                   <li key={item}>
                     <a
                       href="#"
-                      className="text-sm text-gray-400 hover:text-white transition-colors"
+                      className="text-sm text-white transition-colors"
                     >
                       {item}
                     </a>
@@ -122,9 +121,9 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/10">
+      <div className="border-t border-white/40">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-gray-600">
+          <p className="text-xs text-white">
             © {new Date().getFullYear()} SynexNova Inc. All rights reserved.
           </p>
           <div className="flex items-center gap-5">

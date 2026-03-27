@@ -8,6 +8,7 @@ import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import Slider from "@/components/Slider";
 import Footer from "@/components/Footer";
+import Expir from "@/components/Expir";
 
 export default function Home() {
   return (
