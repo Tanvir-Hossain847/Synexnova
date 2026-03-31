@@ -5,8 +5,9 @@ import { Badge } from "@/components/ui/badge";
 import {
   Plus, Trash2, Pencil, Check, X, Loader2, Package,
 } from "lucide-react";
+import Loader from "@/components/Loader";
 
-const API = "http://localhost:4000/services";
+const API = "https://synexnova-backend.vercel.app/services";
 
 const STATUS_OPTIONS = [null, "Active", "Beta", "Inactive", "Deprecated"];
 
@@ -183,7 +184,6 @@ export default function ServicesPage() {
   const active   = services.filter((s) => s.status === "Active").length;
   const beta     = services.filter((s) => s.status === "Beta").length;
   const noStatus = services.filter((s) => !s.status).length;
-
   // ── Render ────────────────────────────────────────────
   return (
     <div className="space-y-6">
@@ -223,9 +223,7 @@ export default function ServicesPage() {
       <Card className="border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.05)]">
         <CardContent className="p-0">
           {loading ? (
-            <div className="flex items-center justify-center gap-2 py-16 text-gray-400 anta text-sm">
-              <Loader2 size={16} className="animate-spin" /> Loading services...
-            </div>
+            <Loader text="Loading services..." />
           ) : error ? (
             <div className="py-16 text-center text-sm text-red-500 anta">
               Failed to load: {error}
@@ -239,7 +237,7 @@ export default function ServicesPage() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-gray-100">
-                  {["Service", "Users", "Revenue", "Growth", "Status", "Actions"].map((h) => (
+                  {["Service", "Category", "Tag", "Stats", "Status", "Actions"].map((h) => (
                     <th key={h} className="text-left text-[10px] font-semibold tracking-widest uppercase text-gray-400 px-6 py-3">{h}</th>
                   ))}
                 </tr>
@@ -250,12 +248,12 @@ export default function ServicesPage() {
                   return (
                     <tr key={svc.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/40 transition-colors">
 
-                      {/* Name */}
+                      {/* Service name */}
                       <td className="px-6 py-3.5">
                         {isEditing ? (
                           <input
-                            value={editForm.name}
-                            onChange={(e) => setEditForm((p) => ({ ...p, name: e.target.value }))}
+                            value={editForm.title ?? ""}
+                            onChange={(e) => setEditForm((p) => ({ ...p, title: e.target.value }))}
                             className="w-full px-2 py-1 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-accent anta"
                           />
                         ) : (
@@ -263,48 +261,54 @@ export default function ServicesPage() {
                             <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center shrink-0">
                               <Package size={14} className="text-gray-500" />
                             </div>
-                            <span className="text-sm font-semibold text-black">{svc.name}</span>
+                            <div>
+                              <p className="text-sm font-semibold text-black">{svc.title || svc.name || "—"}</p>
+                              <p className="text-xs text-gray-400 anta">{svc.slug || ""}</p>
+                            </div>
                           </div>
                         )}
                       </td>
 
-                      {/* Users */}
+                      {/* Category */}
                       <td className="px-6 py-3.5 text-sm text-gray-500 anta">
                         {isEditing ? (
                           <input
-                            value={editForm.users}
-                            onChange={(e) => setEditForm((p) => ({ ...p, users: e.target.value }))}
-                            className="w-20 px-2 py-1 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-accent anta"
+                            value={editForm.category ?? ""}
+                            onChange={(e) => setEditForm((p) => ({ ...p, category: e.target.value }))}
+                            className="w-28 px-2 py-1 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-accent anta"
                           />
                         ) : (
-                          svc.users ? Number(svc.users).toLocaleString() : "—"
+                          svc.category || "—"
                         )}
                       </td>
 
-                      {/* Revenue */}
-                      <td className="px-6 py-3.5 text-sm font-semibold text-black">
+                      {/* Tag */}
+                      <td className="px-6 py-3.5">
                         {isEditing ? (
                           <input
-                            value={editForm.revenue}
-                            onChange={(e) => setEditForm((p) => ({ ...p, revenue: e.target.value }))}
+                            value={editForm.tag ?? ""}
+                            onChange={(e) => setEditForm((p) => ({ ...p, tag: e.target.value }))}
                             className="w-24 px-2 py-1 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-accent anta"
                           />
-                        ) : (
-                          svc.revenue || "—"
-                        )}
+                        ) : svc.tag ? (
+                          <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-gray-50 text-gray-500 border border-gray-200">
+                            {svc.tag}
+                          </span>
+                        ) : "—"}
                       </td>
 
-                      {/* Growth */}
-                      <td className="px-6 py-3.5 text-sm font-semibold text-emerald-600">
-                        {isEditing ? (
-                          <input
-                            value={editForm.growth}
-                            onChange={(e) => setEditForm((p) => ({ ...p, growth: e.target.value }))}
-                            className="w-20 px-2 py-1 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-accent anta"
-                          />
-                        ) : (
-                          svc.growth || "—"
-                        )}
+                      {/* Stats — show first stat value+label */}
+                      <td className="px-6 py-3.5 text-sm text-gray-500 anta">
+                        {svc.stats && svc.stats.length > 0 ? (
+                          <div className="flex flex-col gap-0.5">
+                            {svc.stats.slice(0, 2).map((st, i) => (
+                              <span key={i} className="text-xs">
+                                <span className="font-semibold text-black">{st.value}</span>
+                                <span className="text-gray-400"> {st.label}</span>
+                              </span>
+                            ))}
+                          </div>
+                        ) : "—"}
                       </td>
 
                       {/* Status */}

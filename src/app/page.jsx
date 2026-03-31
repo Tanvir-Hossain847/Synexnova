@@ -7,21 +7,22 @@ import StatsSection from "@/components/StatsSection";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import Slider from "@/components/Slider";
+import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
-import Expir from "@/components/Expir";
 
 export default function Home() {
   return (
     <main>
       <Navbar />
       <Hero />
-      <Slider/>
+      <Slider />
       <Features />
       <StartupSection />
       <GlobePresence />
       <StatsSection />
       <Testimonials />
       <FAQ />
+      <Newsletter />
       <Footer />
     </main>
   );
