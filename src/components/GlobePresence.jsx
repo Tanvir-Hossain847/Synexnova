@@ -115,7 +115,10 @@ function GlobeCanvas() {
         if (Math.abs(velX.current) < 0.0001) phiRef.current += 0.004;
       }
       globe.update({ phi: phiRef.current, theta: thetaRef.current });
-      updateLabels();
+      // Throttle DOM label updates to every 3rd frame to reduce layout thrashing
+      if (!animate._frame) animate._frame = 0;
+      animate._frame++;
+      if (animate._frame % 3 === 0) updateLabels();
       rafId = requestAnimationFrame(animate);
     }
 
@@ -124,7 +127,7 @@ function GlobeCanvas() {
       if (visible) animate();
     });
     observer.observe(canvasRef.current);
-    animate();
+    // Don't call animate() here — let IntersectionObserver start it
 
     return () => {
       if (rafId) cancelAnimationFrame(rafId);
