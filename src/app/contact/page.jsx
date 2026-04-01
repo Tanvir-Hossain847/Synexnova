@@ -40,13 +40,29 @@ export default function ContactPage() {
     name: "", email: "", company: "", service: "", message: "",
   });
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleChange = (e) =>
     setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSent(true);
+    setSubmitting(true);
+    setError(null);
+    try {
+      const res = await fetch("https://synexnova-backend.vercel.app/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, sentAt: new Date().toISOString(), read: false }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setSent(true);
+    } catch (e) {
+      setError("Failed to send. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -283,12 +299,15 @@ export default function ContactPage() {
 
                   <button
                     type="submit"
+                    disabled={submitting}
                     className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full font-semibold text-sm text-white
-                      hover:opacity-90 transition-opacity"
+                      hover:opacity-90 transition-opacity disabled:opacity-60"
                     style={{ backgroundColor: "var(--color-accent)" }}
                   >
-                    Send Message <ArrowRight size={15} />
+                    {submitting ? "Sending..." : <>Send Message <ArrowRight size={15} /></>}
                   </button>
+
+                  {error && <p className="text-xs text-red-500 text-center anta">{error}</p>}
 
                   <p className="text-xs text-gray-400 text-center font-light anta">
                     By submitting, you agree to our{" "}
