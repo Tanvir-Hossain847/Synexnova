@@ -83,8 +83,7 @@ export default function Globe() {
       if (isVisible) animate();
     });
     observer.observe(canvasRef.current);
-
-    animate();
+    // Don't call animate() here — let IntersectionObserver start it
 
     return () => {
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
