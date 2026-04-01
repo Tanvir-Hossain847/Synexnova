@@ -1,14 +1,39 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { fadeUp, stagger } from "@/lib/motion";
 import { Eye, EyeOff, ArrowRight } from "lucide-react";
 import Cubes from "@/components/Cubes";
 
 export default function LoginPage() {
-  const [show, setShow] = useState(false);
-  const [form, setForm] = useState({ email: "", password: "" });
+  const router = useRouter();
+  const [show, setShow]     = useState(false);
+  const [form, setForm]     = useState({ email: "", password: "" });
+  const [error, setError]   = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const onChange = (e) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (!res.ok) { setError(data.error || "Invalid credentials"); return; }
+      router.push("/dashboard");
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen grid md:grid-cols-2">
@@ -84,7 +109,7 @@ export default function LoginPage() {
           <motion.form
             variants={stagger(0.07)} initial="hidden" animate="show"
             className="mt-8 space-y-4"
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleSubmit}
           >
             <motion.div variants={fadeUp}>
               <label className="block text-xs font-semibold tracking-widest uppercase text-gray-400 mb-1.5">Email</label>
@@ -116,11 +141,16 @@ export default function LoginPage() {
 
             <motion.button
               variants={fadeUp} type="submit"
-              className="w-full anta flex items-center justify-center gap-2 py-3.5 rounded-full text-sm text-white hover:opacity-90 transition-opacity mt-2"
+              disabled={loading}
+              className="w-full anta flex items-center justify-center gap-2 py-3.5 rounded-full text-sm text-white hover:opacity-90 transition-opacity mt-2 disabled:opacity-60"
               style={{ backgroundColor: "var(--color-accent)" }}
             >
-              Sign In <ArrowRight size={15} />
+              {loading ? "Signing in..." : <>Sign In <ArrowRight size={15} /></>}
             </motion.button>
+
+            {error && (
+              <motion.p variants={fadeUp} className="text-xs text-red-500 text-center anta">{error}</motion.p>
+            )}
 
             <motion.div variants={fadeUp} className="relative flex items-center gap-3 py-2">
               <div className="flex-1 h-px bg-gray-100" />
