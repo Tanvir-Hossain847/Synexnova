@@ -29,16 +29,7 @@ export default function Newsletter() {
   }
 
   return (
-    <section className="relative bg-white py-24 overflow-hidden">
-      {/* Threads WebGL background */}
-      <div className="absolute inset-0">
-        <Threads
-          amplitude={1.2}
-          distance={0}
-          enableMouseInteraction
-          color={[89 / 255, 131 / 255, 157 / 255]}
-        />
-      </div>
+    <section className="relative bg-white py-16 md:py-24 overflow-hidden">
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6">

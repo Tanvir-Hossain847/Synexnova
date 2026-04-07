@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin } from "lucide-react";
 
 const ACCENT = "var(--color-accent)";
-const SIZE = 560;
+// SIZE is now dynamic — read from container at runtime
 
 // City data — used only for HTML label projection, NOT passed to cobe
 const cities = [
@@ -50,6 +50,7 @@ function project(lat, lng, phi, theta, size) {
 }
 
 function GlobeCanvas() {
+  const wrapRef    = useRef(null);   // outer div — drives size
   const canvasRef  = useRef(null);
   const overlayRef = useRef(null);
   const phiRef     = useRef(0);
@@ -59,10 +60,12 @@ function GlobeCanvas() {
   const lastY      = useRef(0);
   const velX       = useRef(0);
   const velY       = useRef(0);
+  const sizeRef    = useRef(320);    // current pixel size
 
   useEffect(() => {
+    if (!wrapRef.current || !canvasRef.current) return;
     let globe, rafId;
-    let visible = true;
+    let visible = false;
     const dpr = Math.min(window.devicePixelRatio, 2);
 
     // Read accent from CSS var at runtime
@@ -75,10 +78,15 @@ function GlobeCanvas() {
     const [cr, cg, cb] = (computed.match(/\d+/g) || ["89","131","157"]).map(Number);
     const accentRGB = [cr / 255, cg / 255, cb / 255];
 
+    // Init size from container
+    sizeRef.current = wrapRef.current.clientWidth || 320;
+
+    const s = sizeRef.current;
+
     globe = createGlobe(canvasRef.current, {
       devicePixelRatio: dpr,
-      width:  SIZE * dpr,
-      height: SIZE * dpr,
+      width:  s * dpr,
+      height: s * dpr,
       phi: 0, theta: 0.3,
       dark: 0, diffuse: 1.1,
       mapSamples: 30000, mapBrightness: 5,
@@ -88,12 +96,27 @@ function GlobeCanvas() {
       markers: cities.map(({ location, size }) => ({ location, size })),
     });
 
+    // Resize globe when container changes
+    const resizeObserver = new ResizeObserver(() => {
+      const newSize = wrapRef.current?.clientWidth || sizeRef.current;
+      if (newSize !== sizeRef.current && globe) {
+        sizeRef.current = newSize;
+        globe.update({ width: newSize * dpr, height: newSize * dpr });
+        if (canvasRef.current) {
+          canvasRef.current.style.width  = `${newSize}px`;
+          canvasRef.current.style.height = `${newSize}px`;
+        }
+      }
+    });
+    resizeObserver.observe(wrapRef.current);
+
     function updateLabels() {
       if (!overlayRef.current) return;
+      const sz = sizeRef.current;
       overlayRef.current.querySelectorAll("[data-city]").forEach((el, i) => {
         const c = cities[i];
         const { x, y, visible: vis, depth } = project(
-          c.location[0], c.location[1], phiRef.current, thetaRef.current, SIZE
+          c.location[0], c.location[1], phiRef.current, thetaRef.current, sz
         );
         el.style.left    = `${x}px`;
         el.style.top     = `${y}px`;
@@ -132,6 +155,7 @@ function GlobeCanvas() {
     return () => {
       if (rafId) cancelAnimationFrame(rafId);
       observer.disconnect();
+      resizeObserver.disconnect();
       try {
         if (globe) {
           const canvas = canvasRef.current;
@@ -164,8 +188,8 @@ function GlobeCanvas() {
 
   return (
     <div
-      className="relative select-none"
-      style={{ width: SIZE, height: SIZE, maxWidth: "100%" }}
+      ref={wrapRef}
+      className="relative select-none w-full aspect-square"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
@@ -173,7 +197,7 @@ function GlobeCanvas() {
     >
       <canvas
         ref={canvasRef}
-        style={{ width: SIZE, height: SIZE, maxWidth: "100%", cursor: "grab", display: "block" }}
+        style={{ width: "100%", height: "100%", cursor: "grab", display: "block" }}
       />
 
       {/* City name label overlay */}
@@ -206,9 +230,9 @@ function GlobeCanvas() {
 
 export default function GlobePresence() {
   return (
-    <section className="bg-white pt-10 pb-20 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+    <section className="bg-white pt-10 pb-16 md:pb-20 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
           {/* Left */}
           <motion.div
@@ -256,7 +280,7 @@ export default function GlobePresence() {
             variants={slideRight} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}
             className="flex items-center justify-center"
           >
-            <div className="relative" style={{ width: SIZE, maxWidth: "100%" }}>
+            <div className="relative w-full max-w-[320px] sm:max-w-[420px] md:max-w-[560px] mx-auto">
               <div
                 className="absolute inset-0 rounded-full pointer-events-none"
                 style={{

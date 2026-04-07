@@ -28,7 +28,7 @@ export default function Footer() {
     <footer className="bg-accent text-white">
       {/* CTA band */}
       <div className="border-b border-white/40">
-        <div className="max-w-7xl mx-auto px-6 py-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
             <p className="text-lg font-semibold tracking-widest odibee uppercase text-primary mb-2">
               Ready to launch?
@@ -56,8 +56,8 @@ export default function Footer() {
       </div>
 
       {/* Main grid */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-12">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-8 md:gap-12">
           {/* Brand col */}
           <div className="space-y-5">
             <a href="/" className="flex items-center">

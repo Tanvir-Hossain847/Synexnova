@@ -75,9 +75,9 @@ export default function FAQ() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section className="bg-white py-28">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-[1fr_2fr] gap-16">
+    <section className="bg-white py-16 md:py-28">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 md:gap-16">
           {/* Left */}
           <motion.div
             variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}

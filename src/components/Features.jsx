@@ -32,20 +32,17 @@ const cardVariants = {
 
 export default function Features() {
   return (
-    <section id="services" className="bg-gray-50 py-28">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.div
-          className="max-w-2xl mb-16"
-          variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}
-        >
-          <motion.span variants={fadeUp} className="text-xs font-semibold tracking-widest uppercase text-gray-400 odibee">What We Build</motion.span>
-          <motion.h2 variants={fadeUp} className="mt-3 text-4xl md:text-6xl text-black odibee">
+    <section id="services" className="bg-gray-50 py-16 md:py-28">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="max-w-2xl mb-10 md:mb-16">
+          <span className="text-xs font-semibold tracking-widest uppercase text-gray-400 odibee">What We Build</span>
+          <h2 className="mt-3 text-3xl md:text-6xl text-black odibee">
             Every tool your<br />business needs.
-          </motion.h2>
-          <motion.p variants={fadeUp} className="mt-4 text-base text-gray-400 font-light leading-relaxed anta">
+          </h2>
+          <p className="mt-4 text-base text-gray-400 font-light leading-relaxed anta">
             Eight integrated solutions designed to work together — or independently — so you can move fast without switching platforms.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {features.map((f, i) => {

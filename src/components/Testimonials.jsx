@@ -41,8 +41,8 @@ export default function Testimonials() {
   if (total === 0) return null;
 
   return (
-    <section className="bg-gray-50 py-28 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="bg-gray-50 py-16 md:py-28 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
 
         {/* Header */}
         <motion.div
@@ -85,13 +85,16 @@ export default function Testimonials() {
                 key={`${start}-${i}`}
                 custom={dir}
                 initial={{ opacity: 0, x: dir > 0 ? 60 : -60 }}
-                animate={{ opacity: 1, x: 0, transition: { duration: 0.45, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] } }}
+                animate={{ opacity: 1, x: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } }}
                 exit={{ opacity: 0, x: dir > 0 ? -60 : 60, transition: { duration: 0.25 } }}
-                className="group relative bg-white rounded-2xl border border-gray-100 p-6 flex flex-col
+                className={`group relative bg-white rounded-2xl border border-gray-100 p-6 flex flex-col
                   shadow-[0_2px_12px_rgba(0,0,0,0.06)]
                   hover:-translate-y-1 hover:border-accent/30
                   hover:shadow-[0_12px_40px_color-mix(in_srgb,var(--color-accent)_15%,transparent)]
-                  transition-all duration-300 overflow-hidden"
+                  transition-all duration-300 overflow-hidden
+                  ${i > 0 ? "hidden sm:flex" : "flex"}
+                  ${i > 1 ? "lg:flex sm:hidden" : ""}
+                  ${i > 1 ? "lg:flex" : ""}`}
               >
                 <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-accent" />
                 <div

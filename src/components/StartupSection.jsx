@@ -27,11 +27,11 @@ const regions = ["North America", "Europe", "Middle East", "South Asia", "Southe
 
 export default function StartupSection() {
   return (
-    <section className="bg-white py-20 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="bg-white py-16 md:py-20 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
 
         {/* Two-column intro */}
-        <div className="grid md:grid-cols-2 gap-16 items-center mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center mb-14 md:mb-24">
           <motion.div variants={slideLeft} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
             <span className="text-xs odibee font-semibold tracking-widest uppercase text-gray-400">Built for Startups</span>
             <h2 className="mt-3 text-4xl odibee md:text-6xl text-black">
