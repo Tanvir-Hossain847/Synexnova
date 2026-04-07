@@ -50,8 +50,8 @@ export default function StatsSection() {
   }, []);
 
   return (
-    <section ref={ref} className="bg-white py-28 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+    <section ref={ref} className="bg-white py-16 md:py-28 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <motion.div
           className="text-center mb-16"
           variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}
@@ -73,7 +73,7 @@ export default function StatsSection() {
             <motion.div
               key={s.label}
               variants={i % 2 === 0 ? fromLeft : fromRight}
-              className="group relative bg-white px-8 py-10 overflow-hidden hover:bg-accent/10 hover:text-white transition-all duration-200"
+              className="group relative bg-white px-4 md:px-8 py-8 md:py-10 overflow-hidden hover:bg-accent/10 hover:text-white transition-all duration-200"
             >
               {/* accent glow on hover */}
               <p className="text-4xl anta md:text-5xl font-black text-accent tabular-nums">
