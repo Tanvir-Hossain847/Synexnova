@@ -3,12 +3,8 @@ import Footer from "@/components/Footer";
 import { ArrowRight, Users, Globe, Rocket, Shield, Award, Heart } from "lucide-react";
 
 const team = [
-  { name: "Marcus Reid",    role: "CEO & Co-Founder",       avatar: "MR", bio: "Former engineering lead at Stripe. Built SynexNova to give every startup access to enterprise-grade tech." },
-  { name: "Anika Patel",   role: "CTO & Co-Founder",       avatar: "AP", bio: "10 years building distributed systems. Obsessed with reliability, scale, and developer experience." },
-  { name: "Jordan Osei",   role: "Head of Product",         avatar: "JO", bio: "Product leader who spent 6 years at Shopify. Believes great software should feel invisible." },
-  { name: "Lena Müller",   role: "Head of Design",          avatar: "LM", bio: "Crafts interfaces that are both beautiful and functional. Previously at Figma and Linear." },
-  { name: "Carlos Vega",   role: "Head of Engineering",     avatar: "CV", bio: "Full-stack architect with a passion for clean APIs and systems that scale without drama." },
-  { name: "Priya Sharma",  role: "Head of Customer Success",avatar: "PS", bio: "Ensures every client gets the most out of SynexNova. 500+ onboardings and counting." },
+  { name: "Shakil Mahmud",  role: "CEO & Lead Senior Developer", avatar: "SM", bio: "Leads product engineering and company vision at SynexNova. Full-stack architect with a passion for building scalable, enterprise-grade technology for startups." },
+  { name: "Bashire Oscer",  role: "Executive & VC",              avatar: "BO", bio: "Drives strategic growth and investor relations at SynexNova. Brings deep experience in venture capital and executive leadership across global markets." },
 ];
 
 const values = [
@@ -47,7 +43,7 @@ export default function AboutPage() {
             <span className="text-xs odibee font-semibold tracking-widest uppercase text-gray-400">Our Story</span>
             <h1 className="mt-3 text-5xl md:text-7xl odibee text-black">
               We build the tools<br />
-              <span style={{ color: "var(--color-accent)" }}>founders actually need.</span>
+              <span className="text-accent odibee">founders actually need.</span>
             </h1>
             <p className="mt-6 text-base md:text-lg text-gray-400 anta font-light max-w-2xl mx-auto leading-relaxed">
               SynexNova started with a simple belief — that every startup deserves the same
@@ -167,7 +163,7 @@ export default function AboutPage() {
                 A small, focused team of builders who've worked at the best companies in tech — and left to build something better.
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
               {team.map((t) => (
                 <div key={t.name} className="group rounded-2xl border border-gray-100 bg-white p-6
                   shadow-[0_2px_12px_rgba(0,0,0,0.05)] hover:-translate-y-1
@@ -188,24 +184,23 @@ export default function AboutPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-24 bg-black">
+        <section className="py-24 bg-accent border border-white/50">
           <div className="max-w-3xl mx-auto px-6 text-center">
-            <span className="text-xs odibee font-semibold tracking-widest uppercase text-gray-500">Join Us</span>
+            <span className="text-xs odibee font-semibold tracking-widest uppercase text-white/70">Join Us</span>
             <h2 className="mt-3 text-4xl md:text-5xl odibee text-white">
-              Ready to build with<br />
-              <span style={{ color: "var(--color-accent)" }}>SynexNova?</span>
+              Ready to build with<br />SynexNova?
             </h2>
-            <p className="mt-4 text-base text-gray-400 anta font-light leading-relaxed">
+            <p className="mt-4 text-base text-white/80 anta font-light leading-relaxed">
               Whether you're pre-launch or scaling globally — we're ready when you are.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <a href="/register"
-                className="flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold text-black hover:opacity-90 transition-opacity"
-                style={{ backgroundColor: "var(--color-accent)" }}>
+                className="flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold bg-white hover:opacity-90 transition-opacity"
+                style={{ color: "var(--color-accent)" }}>
                 Get Started Free <ArrowRight size={14} />
               </a>
               <a href="/contact"
-                className="flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold border border-white/20 text-white hover:border-white/50 transition-colors">
+                className="flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold border-2 border-white text-white hover:bg-white/10 transition-colors">
                 Talk to Sales
               </a>
             </div>

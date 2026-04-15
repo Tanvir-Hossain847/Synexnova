@@ -52,7 +52,7 @@ export default function Newsletter() {
 
             <motion.h2 variants={fadeUp} className="mt-3 text-4xl md:text-5xl odibee text-black">
               Get startup insights<br />
-              <span style={{ color: "var(--color-accent)" }}>delivered weekly.</span>
+              <span className="text-accent odibee">delivered weekly.</span>
             </motion.h2>
 
             <motion.p variants={fadeUp} className="mt-4 text-base text-gray-500 anta font-light leading-relaxed">

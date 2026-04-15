@@ -1,20 +1,14 @@
 "use client";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { fadeUp, stagger, slideLeft, slideRight, fromLeft, fromRight } from "@/lib/motion";
-import { ArrowRight, Rocket, Globe, Puzzle, TrendingUp, Shield, HeadphonesIcon } from "lucide-react";
+import { fadeUp, stagger, slideLeft, fromLeft, fromRight } from "@/lib/motion";
+import { ArrowRight, Rocket, Globe, Puzzle, TrendingUp, Shield, HeadphonesIcon, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const ACCENT = "var(--color-accent)";
 const ACCENT_ALPHA = (a) => `color-mix(in srgb, var(--color-accent) ${Math.round(a * 100)}%, transparent)`;
 
-const pillars = [
-  { icon: Rocket, title: "Launch-Ready Stack", desc: "Everything a startup needs from day one — POS, e-commerce, CRM, and mobile — pre-integrated and ready to deploy." },
-  { icon: Puzzle, title: "Tailored to You", desc: "No rigid templates. We scope, design, and build around your business model, industry, and growth stage." },
-  { icon: Globe, title: "Global Reach", desc: "Multi-currency, multi-language, and multi-timezone support so your product works wherever your customers are." },
-  { icon: TrendingUp, title: "Scales With You", desc: "Start lean, grow fast. Our infrastructure handles everything from 10 users to 10 million without a rebuild." },
-  { icon: Shield, title: "Enterprise Security", desc: "Bank-grade encryption, role-based access, and compliance-ready architecture — from your first day of business." },
-  { icon: HeadphonesIcon, title: "Dedicated Support", desc: "A real team behind you. Onboarding specialists, technical support, and a success manager assigned to your account." },
-];
+const ICON_MAP = { Rocket, Globe, Puzzle, TrendingUp, Shield, HeadphonesIcon, Zap };
 
 const statCards = [
   { val: "48h", label: "Average onboarding time", sub: "From contract to live" },
@@ -23,9 +17,16 @@ const statCards = [
   { val: "24/7", label: "Support coverage", sub: "Real humans, always on" },
 ];
 
-const regions = ["North America", "Europe", "Middle East", "South Asia", "Southeast Asia", "Latin America"];
-
 export default function StartupSection() {
+  const [pillars, setPillars] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/features")
+      .then(r => r.json())
+      .then(setPillars)
+      .catch(() => {});
+  }, []);
+
   return (
     <section className="bg-white py-16 md:py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -75,41 +76,41 @@ export default function StartupSection() {
           </motion.div>
         </div>
 
-        {/* Pillars */}
-        <motion.div
-          className="mb-20"
-          variants={stagger(0.07)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }}
-        >
-          <motion.h3 variants={fadeUp} className="text-2xl anta text-black mb-8">
-            Why startups choose SynexNova
-          </motion.h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {pillars.map((p, i) => {
-              const Icon = p.icon;
-              return (
-                <motion.div
-                  key={p.title}
-                  variants={i % 2 === 0 ? fromLeft : fromRight}
-                  className="group rounded-2xl border border-gray-100 bg-white p-6 overflow-hidden relative
-                    shadow-[0_2px_12px_rgba(0,0,0,0.06)]
-                    hover:-translate-y-1 hover:border-accent/30 hover:shadow-[0_12px_40px_color-mix(in_srgb,var(--color-accent)_18%,transparent)]
-                    transition-all duration-300 cursor-pointer"
-                >
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"
-                    style={{ background: `radial-gradient(ellipse at top left, ${ACCENT_ALPHA(0.07)} 0%, transparent 70%)` }} />
-                  <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: ACCENT }} />
-                  <div className="w-10 h-10 rounded-xl bg-gray-50 group-hover:bg-accent/10 flex items-center justify-center mb-4 transition-colors">
-                    <Icon size={18} className="text-gray-600 group-hover:text-accent transition-colors" />
-                  </div>
-                  <h4 className="text-base anta font-bold text-black mb-1.5">{p.title}</h4>
-                  <p className="text-sm anta text-gray-400 font-light leading-relaxed">{p.desc}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
-
-        {/* Global reach — moved to GlobePresence section */}
+        {/* Pillars — dynamic from API */}
+        {pillars.length > 0 && (
+          <motion.div
+            className="mb-20"
+            variants={stagger(0.07)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }}
+          >
+            <motion.h3 variants={fadeUp} className="text-2xl anta text-black mb-8">
+              Why startups choose SynexNova
+            </motion.h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {pillars.map((p, i) => {
+                const Icon = ICON_MAP[p.icon] || Zap;
+                return (
+                  <motion.div
+                    key={p._id || p.title}
+                    variants={i % 2 === 0 ? fromLeft : fromRight}
+                    className="group rounded-2xl border border-gray-100 bg-white p-6 overflow-hidden relative
+                      shadow-[0_2px_12px_rgba(0,0,0,0.06)]
+                      hover:-translate-y-1 hover:border-accent/30 hover:shadow-[0_12px_40px_color-mix(in_srgb,var(--color-accent)_18%,transparent)]
+                      transition-all duration-300 cursor-pointer"
+                  >
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"
+                      style={{ background: `radial-gradient(ellipse at top left, ${ACCENT_ALPHA(0.07)} 0%, transparent 70%)` }} />
+                    <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: ACCENT }} />
+                    <div className="w-10 h-10 rounded-xl bg-gray-50 group-hover:bg-accent/10 flex items-center justify-center mb-4 transition-colors">
+                      <Icon size={18} className="text-gray-600 group-hover:text-accent transition-colors" />
+                    </div>
+                    <h4 className="text-base anta font-bold text-black mb-1.5">{p.title}</h4>
+                    <p className="text-sm anta text-gray-400 font-light leading-relaxed">{p.description || p.desc}</p>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
 
       </div>
     </section>
