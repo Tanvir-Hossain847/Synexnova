@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, Package, Star, Users, Mail,
   MessageSquare, BarChart3, Settings, LogOut,
-  Menu, X, Bell, ChevronDown, FileText, Zap,
+  Menu, X, Bell, ChevronDown, FileText, Zap, HelpCircle,
 } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -20,6 +20,7 @@ const nav = [
   { label: "Messages",    href: "/dashboard/messages",     icon: MessageSquare, badge: 4 },
   { label: "Blog",        href: "/dashboard/blog",         icon: FileText },
   { label: "Features",    href: "/dashboard/features",     icon: Zap },
+  { label: "FAQ",         href: "/dashboard/faq",          icon: HelpCircle },
   { label: "Stats",       href: "/dashboard/stats",        icon: BarChart3 },
 ];
 

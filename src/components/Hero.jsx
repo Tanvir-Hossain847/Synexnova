@@ -3,7 +3,7 @@ import Globe from './Globe'
 
 export default function Hero() {
   return (
-    <div className='relative overflow-hidden min-h-screen'>
+    <div className='relative min-h-screen'>
       {/* Grid background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-size-[80px_80px] opacity-50 pointer-events-none" />
 
