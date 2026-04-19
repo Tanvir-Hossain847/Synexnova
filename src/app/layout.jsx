@@ -1,4 +1,4 @@
-import { Roboto } from "next/font/google";
+import { Roboto, Odibee_Sans, Anta } from "next/font/google";
 import "./globals.css";
 import PageLoader from "@/components/PageLoader";
 import LenisProvider from "@/LenisProverder/LenisProvider";
@@ -10,6 +10,18 @@ const roboto = Roboto({
   display: "swap",
 });
 
+const anta = Anta({
+  variable: "--font-anta",
+  subsets: ["latin"],
+  weight: ["400"], // Anta only has 400
+});
+
+const odibee = Odibee_Sans({
+  variable: "--font-odibee",
+  subsets: ["latin"],
+  weight: ["400"], // Odibee Sans only has 400
+});
+
 export const metadata = {
   title: "SynexNova — One Platform. Every Solution.",
   description:
@@ -19,7 +31,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${roboto.variable} antialiased`}>
+      <body className={`${roboto.variable} ${anta.variable} ${odibee.variable} antialiased`}>
         <LenisProvider>
         <PageLoader />
         {children}
