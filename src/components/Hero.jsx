@@ -37,7 +37,7 @@ export default function Hero() {
 
       {/* Desktop layout — absolute positioned */}
       <div className="hidden md:block">
-        <div className="absolute mt-45  ml-35">
+        <div className="absolute mt-45 ml-35">
           <h1 className='text-5xl font-bold max-w-4xl anta'>
             One Platform.<br />
             <span className='text-accent anta'>Every Business Solution.</span>
@@ -51,7 +51,7 @@ export default function Hero() {
             <button className="px-8 border-2 border-secondary py-3 rounded-full bg-primary text-secondary transition-all duration-300 hover:scale-105 hover:shadow-xl">
               Explore Solutions
             </button>
-            <button className="group border-2 border-secondary relative px-8 py-3 rounded-full border border-primary overflow-hidden transition-all duration-300 hover:scale-105">
+            <button className="group border-secondary relative px-8 py-3 rounded-full border-2 overflow-hidden transition-all duration-300 hover:scale-105">
               <span className="absolute inset-0 bg-secondary translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
               <span className="relative z-10 transition-colors duration-500 group-hover:text-primary">
                 Book a Demo →
