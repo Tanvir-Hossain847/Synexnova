@@ -51,7 +51,7 @@ export default function ContactPage() {
     setSubmitting(true);
     setError(null);
     try {
-      const res = await fetch("https://synexnova-backend.vercel.app/messages", {
+      const res = await fetch("http://localhost:4000/messages", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form, sentAt: new Date().toISOString(), read: false }),

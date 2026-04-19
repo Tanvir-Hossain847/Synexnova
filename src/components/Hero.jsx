@@ -37,8 +37,8 @@ export default function Hero() {
 
       {/* Desktop layout — absolute positioned */}
       <div className="hidden md:block">
-        <div className="absolute mt-40 ml-20">
-          <h1 className='text-6xl font-bold max-w-4xl anta'>
+        <div className="absolute mt-45  ml-35">
+          <h1 className='text-5xl font-bold max-w-4xl anta'>
             One Platform.<br />
             <span className='text-accent anta'>Every Business Solution.</span>
           </h1>

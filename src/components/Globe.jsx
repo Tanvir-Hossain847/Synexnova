@@ -130,15 +130,13 @@ export default function Globe() {
   return (
     <div style={{
       width: "100%",
-      maxWidth: 1500,
-      maxHeight: 1500,
+      maxWidth: 900,
+      maxHeight: 900,
       objectFit: "cover",
       margin: "0 auto",
-      transform: "translateX(500px) translateY(-200px)",
-      overflow: "hidden",
-      height: 1000,
-      opacity: "30%",
-      marginBottom: "-200px",
+      transform: "translateX(350px) translateY(-30px)",
+      height: 900,
+      opacity: "40%",
     }}>
       <canvas
         ref={canvasRef}
@@ -147,8 +145,8 @@ export default function Globe() {
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerUp}
         style={{
-          width: 1500,
-          height: 1500,
+          width: 900,
+          height: 900,
           maxWidth: "100%",
           cursor: "grab",
         }}
