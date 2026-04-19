@@ -9,13 +9,13 @@ const API = "http://localhost:4000/faq";
 const inp = "w-full px-3 py-2 rounded-xl border-2 border-accent/50 text-sm text-black placeholder-gray-300 focus:outline-none focus:border-accent transition-colors anta bg-white";
 
 export default function FAQDashboardPage() {
-  const [faqs, setFaqs]         = useState([]);
-  const [loading, setLoading]   = useState(true);
-  const [adding, setAdding]     = useState(false);
-  const [form, setForm]         = useState({ question: "", answer: "" });
-  const [saving, setSaving]     = useState(false);
-  const [deleting, setDeleting] = useState(null);
+  const [faqs, setFaqs]       = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [adding, setAdding]   = useState(false);
   const [expanded, setExpanded] = useState(null);
+  const [form, setForm]       = useState({ question: "", answer: "" });
+  const [saving, setSaving]   = useState(false);
+  const [deleting, setDeleting] = useState(null);
 
   async function fetchFaqs() {
     setLoading(true);
@@ -85,48 +85,36 @@ export default function FAQDashboardPage() {
       ) : faqs.length === 0 ? (
         <p className="text-sm text-gray-400 anta text-center py-10">No FAQs yet. Add one above.</p>
       ) : (
-        <div className="space-y-2">
-          {faqs.map((faq, i) => {
-            const id = faq._id || faq.id;
-            const isOpen = expanded === i;
-            return (
-              <Card key={id} className="border-gray-100 shadow-[0_2px_8px_rgba(0,0,0,0.04)] overflow-hidden">
-                <CardContent className="p-0">
-                  <div className="flex items-center justify-between px-5 py-4 gap-4">
-                    <button
-                      onClick={() => setExpanded(isOpen ? null : i)}
-                      className="flex items-center gap-3 flex-1 text-left"
-                    >
-                      <span className={`w-6 h-6 rounded-full border flex items-center justify-center shrink-0 transition-colors
-                        ${isOpen ? "border-accent bg-accent/10" : "border-gray-200"}`}>
-                        {isOpen
-                          ? <ChevronUp size={12} style={{ color: "var(--color-accent)" }} />
-                          : <ChevronDown size={12} className="text-gray-400" />}
-                      </span>
-                      <span className="text-sm font-semibold text-black">{faq.question || faq.q}</span>
+        <Card className="border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.05)]">
+          <CardContent className="p-0">
+            {faqs.map((faq, i) => {
+              const id = faq._id || faq.id;
+              const q = faq.question || faq.q;
+              const a = faq.answer || faq.a;
+              const isOpen = expanded === id;
+              return (
+                <div key={id} className="border-b border-gray-50 last:border-0">
+                  <div className="flex items-center gap-3 px-6 py-4">
+                    <button onClick={() => setExpanded(isOpen ? null : id)}
+                      className="flex-1 flex items-center justify-between text-left gap-4 group">
+                      <span className="text-sm font-semibold text-black group-hover:text-gray-700 transition-colors">{q}</span>
+                      {isOpen ? <ChevronUp size={15} className="text-gray-400 shrink-0" /> : <ChevronDown size={15} className="text-gray-400 shrink-0" />}
                     </button>
-                    <button
-                      onClick={() => handleDelete(id)}
-                      disabled={deleting === id}
-                      className="w-7 h-7 rounded-lg border border-gray-200 flex items-center justify-center text-gray-400 hover:border-red-400 hover:text-red-500 transition-colors shrink-0"
-                    >
-                      {deleting === id
-                        ? <Loader2 size={11} className="animate-spin" />
-                        : <Trash2 size={11} />}
+                    <button onClick={() => handleDelete(id)} disabled={deleting === id}
+                      className="w-7 h-7 rounded-lg border border-gray-200 flex items-center justify-center text-gray-400 hover:border-red-400 hover:text-red-500 transition-colors shrink-0">
+                      {deleting === id ? <Loader2 size={11} className="animate-spin" /> : <Trash2 size={11} />}
                     </button>
                   </div>
                   {isOpen && (
-                    <div className="px-5 pb-4 border-t border-gray-50">
-                      <p className="text-sm text-gray-500 anta font-light leading-relaxed pt-3">
-                        {faq.answer || faq.a}
-                      </p>
+                    <div className="px-6 pb-4">
+                      <p className="text-sm text-gray-400 anta font-light leading-relaxed">{a}</p>
                     </div>
                   )}
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
+                </div>
+              );
+            })}
+          </CardContent>
+        </Card>
       )}
 
       {/* Add Modal */}
@@ -143,14 +131,12 @@ export default function FAQDashboardPage() {
             <form onSubmit={handleAdd} className="px-7 py-5 space-y-4">
               <div>
                 <label className="block text-[10px] font-semibold tracking-widest uppercase text-gray-400 mb-1.5">Question *</label>
-                <input required value={form.question}
-                  onChange={e => setForm(p => ({ ...p, question: e.target.value }))}
+                <input required value={form.question} onChange={e => setForm(p => ({ ...p, question: e.target.value }))}
                   placeholder="e.g. How quickly can we get started?" className={inp} />
               </div>
               <div>
                 <label className="block text-[10px] font-semibold tracking-widest uppercase text-gray-400 mb-1.5">Answer *</label>
-                <textarea required rows={5} value={form.answer}
-                  onChange={e => setForm(p => ({ ...p, answer: e.target.value }))}
+                <textarea required rows={5} value={form.answer} onChange={e => setForm(p => ({ ...p, answer: e.target.value }))}
                   placeholder="Provide a clear, helpful answer..." className={inp + " resize-none"} />
               </div>
               <div className="flex gap-3 pt-2">

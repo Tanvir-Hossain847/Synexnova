@@ -146,11 +146,13 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-roboto), sans-serif;
+    height: auto;
   }
   html {
     @apply font-sans;
     font-family: var(--font-roboto), sans-serif;
     scroll-behavior: smooth;
+    height: auto;
   }
   button, a, input, textarea, select {
     font-family: var(--font-roboto), sans-serif;

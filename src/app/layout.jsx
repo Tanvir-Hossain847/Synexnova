@@ -1,6 +1,7 @@
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import PageLoader from "@/components/PageLoader";
+import LenisProvider from "@/LenisProverder/LenisProvider";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -19,8 +20,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${roboto.variable} antialiased`}>
+        <LenisProvider>
         <PageLoader />
         {children}
+        </LenisProvider>
       </body>
     </html>
   );

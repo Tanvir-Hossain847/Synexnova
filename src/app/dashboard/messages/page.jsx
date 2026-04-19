@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Trash2, Loader2 } from "lucide-react";
 import Loader from "@/components/Loader";
 
-const API = "https://synexnova-backend.vercel.app/messages";
+const API = "http://localhost:4000/messages";
 
 function timeAgo(iso) {
   if (!iso) return "";
