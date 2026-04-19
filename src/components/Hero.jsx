@@ -3,7 +3,7 @@ import Globe from './Globe'
 
 export default function Hero() {
   return (
-    <div className='relative min-h-screen'>
+    <div className='relative overflow-hidden min-h-screen'>
       {/* Grid background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-size-[80px_80px] opacity-50 pointer-events-none" />
 
@@ -37,7 +37,7 @@ export default function Hero() {
 
       {/* Desktop layout — absolute positioned */}
       <div className="hidden md:block">
-        <div className="absolute mt-40 ml-35">
+        <div className="absolute mt-40 ml-20">
           <h1 className='text-6xl font-bold max-w-4xl anta'>
             One Platform.<br />
             <span className='text-accent anta'>Every Business Solution.</span>

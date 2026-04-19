@@ -131,8 +131,11 @@ export default function Globe() {
     <div style={{
       width: "100%",
       maxWidth: 1500,
+      maxHeight: 1500,
+      objectFit: "cover",
       margin: "0 auto",
       transform: "translateX(500px) translateY(-200px)",
+      overflow: "hidden",
       height: 1000,
       opacity: "30%",
       marginBottom: "-200px",
