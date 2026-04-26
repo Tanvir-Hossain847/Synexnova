@@ -6,7 +6,8 @@ import {
   Plus, Trash2, Pencil, Check, X, Loader2, Package,
 } from "lucide-react";
 import Loader from "@/components/Loader";
-
+import { useModalScroll } from "@/lib/useModalScroll";
+import { swal } from "@/lib/swal";
 const API = "https://synexnova-backend.vercel.app/services";
 
 const STATUS_OPTIONS = [null, "Active", "Beta", "Inactive", "Deprecated"];
@@ -89,6 +90,7 @@ export default function ServicesPage() {
   const [adding, setAdding]       = useState(false);
   const [addForm, setAddForm]     = useState(emptyForm);
   const [saving, setSaving]       = useState(false);
+  useModalScroll(adding);
 
   // ── Fetch ──────────────────────────────────────────────
   async function fetchServices() {
@@ -120,12 +122,10 @@ export default function ServicesPage() {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setAdding(false);
       setAddForm(emptyForm);
+      swal.success("Service added");
       fetchServices();
-    } catch (e) {
-      alert("Failed to add service: " + e.message);
-    } finally {
-      setSaving(false);
-    }
+    } catch (e) { swal.error("Failed to add service"); }
+    finally { setSaving(false); }
   }
 
   // ── Edit ──────────────────────────────────────────────
@@ -144,12 +144,10 @@ export default function ServicesPage() {
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setEditingId(null);
+      swal.success("Service updated");
       fetchServices();
-    } catch (e) {
-      alert("Failed to update: " + e.message);
-    } finally {
-      setSaving(false);
-    }
+    } catch (e) { swal.error("Failed to update service"); }
+    finally { setSaving(false); }
   }
 
   // ── Status-only update ────────────────────────────────
@@ -162,21 +160,17 @@ export default function ServicesPage() {
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       fetchServices();
-    } catch (e) {
-      alert("Failed to update status: " + e.message);
-    }
+    } catch (e) { swal.error("Failed to update status"); }
   }
 
   // ── Delete ────────────────────────────────────────────
   async function handleDelete(id) {
-    if (!confirm("Remove this service?")) return;
+    if (!await swal.confirmDelete("this service")) return;
     try {
       const res = await fetch(`${API}/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       fetchServices();
-    } catch (e) {
-      alert("Failed to delete: " + e.message);
-    }
+    } catch (e) { swal.error("Failed to delete service"); }
   }
 
   // ── Derived stats ─────────────────────────────────────
@@ -397,7 +391,7 @@ export default function ServicesPage() {
               </button>
             </div>
 
-            <form onSubmit={handleAdd} className="overflow-y-auto flex-1">
+            <form onSubmit={handleAdd} className="overflow-y-auto overscroll-contain flex-1">
               <div className="px-7 py-5 space-y-6">
 
                 {/* ── Basic Info ── */}
@@ -540,3 +534,4 @@ export default function ServicesPage() {
     </div>
   );
 }
+

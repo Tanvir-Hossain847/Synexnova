@@ -4,7 +4,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Star, Plus, Trash2, X, Loader2, ShieldCheck } from "lucide-react";
 import Image from "next/image";
+import { useModalScroll } from "@/lib/useModalScroll";
 import Loader from "@/components/Loader";
+import ImageUpload from "@/components/ImageUpload";
 
 const API = "https://synexnova-backend.vercel.app/reviews";
 
@@ -35,6 +37,7 @@ export default function ReviewsPage() {
   const [adding, setAdding]   = useState(false);
   const [form, setForm]       = useState(emptyForm);
   const [saving, setSaving]   = useState(false);
+  useModalScroll(adding);
 
   async function fetchReviews() {
     setLoading(true); setError(null);
@@ -57,18 +60,21 @@ export default function ReviewsPage() {
         body: JSON.stringify({ ...form, rating: Number(form.rating), date: new Date().toISOString() }),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      setAdding(false); setForm(emptyForm); fetchReviews();
-    } catch (e) { alert("Failed: " + e.message); }
+      setAdding(false); setForm(emptyForm);
+      swal.success("Review added");
+      fetchReviews();
+    } catch (e) { swal.error("Failed to add review"); }
     finally { setSaving(false); }
   }
 
   async function handleDelete(id) {
-    if (!confirm("Delete this review?")) return;
+    if (!await swal.confirmDelete("this review")) return;
     try {
       const res = await fetch(`${API}/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      swal.success("Review deleted");
       fetchReviews();
-    } catch (e) { alert("Failed: " + e.message); }
+    } catch (e) { swal.error("Failed to delete review"); }
   }
 
   const avg = reviews.length
@@ -177,10 +183,9 @@ export default function ReviewsPage() {
               </button>
             </div>
 
-            <form id="review-form" onSubmit={handleAdd} className="overflow-y-auto flex-1 px-7 py-5 space-y-4">
+            <form id="review-form" onSubmit={handleAdd} className="overflow-y-auto overscroll-contain flex-1 px-7 py-5 space-y-4">
               {[
                 { label: "Full Name *",      key: "name",     required: true,  placeholder: "Jane Smith",   nested: "user" },
-                { label: "Avatar URL",       key: "avatar",   placeholder: "https://...",                   nested: "user" },
                 { label: "Initials",         key: "initials", placeholder: "JS",                            nested: "user" },
                 { label: "Service Tag",      key: "serviceTag", placeholder: "Point of Sale" },
                 { label: "Review Title *",   key: "title",    required: true,  placeholder: "Great experience" },
@@ -199,6 +204,13 @@ export default function ReviewsPage() {
                   />
                 </div>
               ))}
+
+              <ImageUpload
+                label="Avatar"
+                value={form.user.avatar}
+                onChange={url => setForm(p => ({ ...p, user: { ...p.user, avatar: url } }))}
+                placeholder="https://... or upload photo"
+              />
 
               <div>
                 <label className="block text-[10px] font-semibold tracking-widest uppercase text-gray-400 mb-1.5">Rating</label>
@@ -239,3 +251,4 @@ export default function ReviewsPage() {
     </div>
   );
 }
+

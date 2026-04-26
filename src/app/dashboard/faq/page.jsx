@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Plus, Trash2, X, Loader2, ChevronDown, ChevronUp } from "lucide-react";
 import Loader from "@/components/Loader";
+import { useModalScroll } from "@/lib/useModalScroll";
+import { swal } from "@/lib/swal";
 
-const API = "http://localhost:4000/faq";
+const API = "https://synexnova-backend.vercel.app/faq";
 
 const inp = "w-full px-3 py-2 rounded-xl border-2 border-accent/50 text-sm text-black placeholder-gray-300 focus:outline-none focus:border-accent transition-colors anta bg-white";
 
@@ -16,6 +18,7 @@ export default function FAQDashboardPage() {
   const [form, setForm]       = useState({ question: "", answer: "" });
   const [saving, setSaving]   = useState(false);
   const [deleting, setDeleting] = useState(null);
+  useModalScroll(adding);
 
   async function fetchFaqs() {
     setLoading(true);
@@ -41,19 +44,21 @@ export default function FAQDashboardPage() {
       if (!res.ok) throw new Error();
       setAdding(false);
       setForm({ question: "", answer: "" });
+      swal.success("FAQ added");
       fetchFaqs();
-    } catch { alert("Failed to add FAQ."); }
+    } catch { swal.error("Failed to add FAQ"); }
     finally { setSaving(false); }
   }
 
   async function handleDelete(id) {
-    if (!confirm("Delete this FAQ?")) return;
+    if (!await swal.confirmDelete("this FAQ")) return;
     setDeleting(id);
     try {
       const res = await fetch(`${API}/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error();
+      swal.success("FAQ deleted");
       fetchFaqs();
-    } catch { alert("Failed to delete."); }
+    } catch { swal.error("Failed to delete FAQ"); }
     finally { setDeleting(null); }
   }
 
@@ -157,3 +162,4 @@ export default function FAQDashboardPage() {
     </div>
   );
 }
+

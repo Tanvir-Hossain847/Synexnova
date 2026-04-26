@@ -8,7 +8,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Loader from "@/components/Loader";
 
-const API = "http://localhost:4000/blogs";
+const API = "https://synexnova-backend.vercel.app/blogs";
+
+const isValidUrl = (url) => typeof url === "string" && url.startsWith("http");
 
 function formatDate(iso) {
   if (!iso) return "";
@@ -103,7 +105,7 @@ export default function BlogPage() {
                       <h2 className="text-2xl md:text-3xl odibee text-black mb-3">{featured.title}</h2>
                       <p className="text-sm text-gray-400 anta font-light leading-relaxed mb-5">{featured.excerpt}</p>
                       <div className="flex items-center gap-4 text-xs text-gray-400 anta">
-                        {featured.author?.avatar && (
+                        {isValidUrl(featured.author?.avatar) && (
                           <Image src={featured.author.avatar} alt={featured.author.name} width={28} height={28} className="rounded-full" />
                         )}
                         <span>{featured.author?.name}</span>
@@ -130,13 +132,12 @@ export default function BlogPage() {
                       hover:border-accent/30 transition-all duration-300">
                     <div className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-accent" />
 
-                    {post.coverImage?.url && (
+                    {isValidUrl(post.coverImage?.url) && (
                       <div className="relative h-44 overflow-hidden">
                         <Image src={post.coverImage.url} alt={post.coverImage.alt || post.title}
                           fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                       </div>
                     )}
-
                     <div className="p-5 flex flex-col flex-1">
                       <div className="flex items-center gap-2 mb-3 flex-wrap">
                         {post.category?.name && (
@@ -157,7 +158,7 @@ export default function BlogPage() {
 
                       <div className="flex items-center justify-between pt-3 border-t border-gray-100">
                         <div className="flex items-center gap-2">
-                          {post.author?.avatar && (
+                          {isValidUrl(post.author?.avatar) && (
                             <Image src={post.author.avatar} alt={post.author.name} width={22} height={22} className="rounded-full" />
                           )}
                           <span className="text-xs text-gray-400 anta">{post.author?.name}</span>

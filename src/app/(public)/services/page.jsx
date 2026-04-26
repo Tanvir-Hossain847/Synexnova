@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Loader from "@/components/Loader";
 
-const API = "http://localhost:4000/services";
+const API = "https://synexnova-backend.vercel.app/services";
 
 const ICON_MAP = {
   ShoppingCart, Package, Globe, Users, Handshake, Smartphone, Cpu, Bot,

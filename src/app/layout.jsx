@@ -1,7 +1,6 @@
 import { Roboto, Odibee_Sans, Anta } from "next/font/google";
 import "./globals.css";
 import PageLoader from "@/components/PageLoader";
-import LenisProvider from "@/LenisProverder/LenisProvider";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -32,10 +31,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${roboto.variable} ${anta.variable} ${odibee.variable} antialiased`}>
-        <LenisProvider>
         <PageLoader />
         {children}
-        </LenisProvider>
       </body>
     </html>
   );

@@ -9,7 +9,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Loader from "@/components/Loader";
 
-const API = "http://localhost:4000/blogs";
+const API = "https://synexnova-backend.vercel.app/blogs";
 
 function formatDate(iso) {
   if (!iso) return "";

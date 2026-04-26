@@ -4,8 +4,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Trash2, X, Loader2, Eye, Heart, Clock } from "lucide-react";
 import Loader from "@/components/Loader";
+import ImageUpload from "@/components/ImageUpload";
+import { useModalScroll } from "@/lib/useModalScroll";
+import { swal } from "@/lib/swal";
 
-const API = "http://localhost:4000/blogs";
+const API = "https://synexnova-backend.vercel.app/blogs";
 
 const emptyForm = {
   title: "", slug: "", excerpt: "", content: "", status: "published",
@@ -49,6 +52,7 @@ export default function BlogDashboardPage() {
   const [form, setForm]       = useState(emptyForm);
   const [saving, setSaving]   = useState(false);
   const [deleting, setDeleting] = useState(null);
+  useModalScroll(adding);
 
   async function fetchPosts() {
     setLoading(true);
@@ -88,18 +92,20 @@ export default function BlogDashboardPage() {
       if (!res.ok) throw new Error();
       setAdding(false);
       setForm(emptyForm);
+      swal.success("Post published");
       fetchPosts();
-    } catch { alert("Failed to add post."); }
+    } catch { swal.error("Failed to publish post"); }
     finally { setSaving(false); }
   }
 
   async function handleDelete(id) {
-    if (!confirm("Delete this post?")) return;
+    if (!await swal.confirmDelete("this post")) return;
     setDeleting(id);
     try {
       await fetch(`${API}/${id}`, { method: "DELETE" });
+      swal.success("Post deleted");
       fetchPosts();
-    } catch { alert("Failed to delete."); }
+    } catch { swal.error("Failed to delete post"); }
     finally { setDeleting(null); }
   }
 
@@ -208,7 +214,7 @@ export default function BlogDashboardPage() {
               </button>
             </div>
 
-            <form id="blog-form" onSubmit={handleAdd} className="overflow-y-auto flex-1 px-7 py-5 space-y-6">
+            <form id="blog-form" onSubmit={handleAdd} className="overflow-y-auto overscroll-contain flex-1 px-7 py-5 space-y-6">
 
               <Section title="Basic Info">
                 <Field label="Title *">
@@ -253,7 +259,7 @@ export default function BlogDashboardPage() {
                   <Field label="Name *"><input required value={form.author.name} onChange={e => set("author.name", e.target.value)} placeholder="Jane Smith" className={inp} /></Field>
                   <Field label="Email"><input type="email" value={form.author.email} onChange={e => set("author.email", e.target.value)} placeholder="jane@example.com" className={inp} /></Field>
                 </div>
-                <Field label="Avatar URL"><input value={form.author.avatar} onChange={e => set("author.avatar", e.target.value)} placeholder="https://..." className={inp} /></Field>
+                <ImageUpload label="Avatar" value={form.author.avatar} onChange={url => set("author.avatar", url)} placeholder="https://... or upload" />
                 <Field label="Bio"><input value={form.author.bio} onChange={e => set("author.bio", e.target.value)} placeholder="Short bio..." className={inp} /></Field>
               </Section>
 
@@ -279,7 +285,7 @@ export default function BlogDashboardPage() {
               </Section>
 
               <Section title="Cover Image">
-                <Field label="Image URL"><input value={form.coverImage.url} onChange={e => set("coverImage.url", e.target.value)} placeholder="https://..." className={inp} /></Field>
+                <ImageUpload label="Cover Image" value={form.coverImage.url} onChange={url => set("coverImage.url", url)} placeholder="https://... or upload" />
                 <Field label="Alt Text"><input value={form.coverImage.alt} onChange={e => set("coverImage.alt", e.target.value)} placeholder="Image description" className={inp} /></Field>
               </Section>
 
@@ -308,3 +314,4 @@ export default function BlogDashboardPage() {
     </div>
   );
 }
+
