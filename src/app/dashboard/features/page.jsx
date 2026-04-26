@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Plus, Trash2, X, Loader2, Zap } from "lucide-react";
 import Loader from "@/components/Loader";
+import { useModalScroll } from "@/lib/useModalScroll";
+import { swal } from "@/lib/swal";
 
-const API = "http://localhost:4000/features";
+const API = "https://synexnova-backend.vercel.app/features";
 
 const inp = "w-full px-3 py-2 rounded-xl border-2 border-accent/50 text-sm text-black placeholder-gray-300 focus:outline-none focus:border-accent transition-colors anta bg-white";
 
@@ -15,6 +17,7 @@ export default function FeaturesPage() {
   const [form, setForm]         = useState({ title: "", description: "" });
   const [saving, setSaving]     = useState(false);
   const [deleting, setDeleting] = useState(null);
+  useModalScroll(adding);
 
   async function fetchFeatures() {
     setLoading(true);
@@ -40,19 +43,21 @@ export default function FeaturesPage() {
       if (!res.ok) throw new Error();
       setAdding(false);
       setForm({ title: "", description: "" });
+      swal.success("Feature added");
       fetchFeatures();
-    } catch { alert("Failed to add feature."); }
+    } catch { swal.error("Failed to add feature"); }
     finally { setSaving(false); }
   }
 
   async function handleDelete(id) {
-    if (!confirm("Delete this feature?")) return;
+    if (!await swal.confirmDelete("this feature")) return;
     setDeleting(id);
     try {
       const res = await fetch(`${API}/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error();
+      swal.success("Feature deleted");
       fetchFeatures();
-    } catch { alert("Failed to delete."); }
+    } catch { swal.error("Failed to delete feature"); }
     finally { setDeleting(null); }
   }
 
@@ -181,3 +186,4 @@ export default function FeaturesPage() {
     </div>
   );
 }
+

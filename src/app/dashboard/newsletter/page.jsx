@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Trash2, Mail, Users, Loader2 } from "lucide-react";
 import Loader from "@/components/Loader";
+import { swal } from "@/lib/swal";
 
 const API = "https://synexnova-backend.vercel.app/emails";
 
@@ -30,13 +31,14 @@ export default function NewsletterPage() {
   useEffect(() => { fetchEmails(); }, []);
 
   async function handleDelete(id) {
-    if (!confirm("Remove this subscriber?")) return;
+    if (!await swal.confirmDelete("this subscriber")) return;
     setDeleting(id);
     try {
       const res = await fetch(`${API}/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      swal.success("Subscriber removed");
       fetchEmails();
-    } catch (e) { alert("Failed: " + e.message); }
+    } catch (e) { swal.error("Failed to remove subscriber"); }
     finally { setDeleting(null); }
   }
 
@@ -140,3 +142,4 @@ export default function NewsletterPage() {
     </div>
   );
 }
+

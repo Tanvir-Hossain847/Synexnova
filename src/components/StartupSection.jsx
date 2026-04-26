@@ -21,7 +21,7 @@ export default function StartupSection() {
   const [pillars, setPillars] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/features")
+    fetch("https://synexnova-backend.vercel.app/features")
       .then(r => r.json())
       .then(setPillars)
       .catch(() => {});

@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { fadeUp, stagger } from "@/lib/motion";
 import { Plus, Minus } from "lucide-react";
 
-const API = "http://localhost:4000/faq";
+const API = "https://synexnova-backend.vercel.app/faq";
 
 function FAQItem({ q, a, isOpen, onToggle }) {
   return (

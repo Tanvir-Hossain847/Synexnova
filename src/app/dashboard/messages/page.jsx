@@ -5,8 +5,9 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Trash2, Loader2 } from "lucide-react";
 import Loader from "@/components/Loader";
+import { swal } from "@/lib/swal";
 
-const API = "http://localhost:4000/messages";
+const API = "https://synexnova-backend.vercel.app/messages";
 
 function timeAgo(iso) {
   if (!iso) return "";
@@ -44,13 +45,14 @@ export default function MessagesPage() {
   useEffect(() => { fetchMessages(); }, []);
 
   async function handleDelete(id) {
-    if (!confirm("Delete this message?")) return;
+    if (!await swal.confirmDelete("this message")) return;
     setDeleting(id);
     try {
       const res = await fetch(`${API}/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      swal.success("Message deleted");
       fetchMessages();
-    } catch (e) { alert("Failed: " + e.message); }
+    } catch (e) { swal.error("Failed to delete message"); }
     finally { setDeleting(null); }
   }
 
@@ -133,3 +135,4 @@ export default function MessagesPage() {
     </div>
   );
 }
+

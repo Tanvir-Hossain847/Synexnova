@@ -1,12 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import Lenis from "lenis";
 
 export default function LenisProvider({ children }) {
-  const lenisRef = useRef(null);
-  const rafRef   = useRef(null);
-
   useEffect(() => {
     const lenis = new Lenis({
       duration:        0.9,
@@ -14,22 +11,18 @@ export default function LenisProvider({ children }) {
       smoothWheel:     true,
       wheelMultiplier: 1,
       touchMultiplier: 1.5,
-      infinite:        false,
     });
 
-    lenisRef.current = lenis;
-
+    let rafId;
     function raf(time) {
       lenis.raf(time);
-      rafRef.current = requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
-
-    rafRef.current = requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      cancelAnimationFrame(rafId);
       lenis.destroy();
-      lenisRef.current = null;
     };
   }, []);
 
